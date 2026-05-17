@@ -1,0 +1,55 @@
+{
+  "raw_feature_column_count": 151,
+  "numeric_feature_column_count": 147,
+  "coerced_numeric_columns": [],
+  "excluded_non_numeric_columns": [
+    {
+      "column": "date_available",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 96019,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2009-10-19",
+        "2009-10-19",
+        "2009-10-19"
+      ]
+    },
+    {
+      "column": "external_fred_daily_date_used_lag1",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 95990,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2010-01-04",
+        "2010-01-04",
+        "2010-01-04"
+      ]
+    },
+    {
+      "column": "external_fred_weekly_date_used_lag5",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 95874,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2010-01-04",
+        "2010-01-04",
+        "2010-01-04"
+      ]
+    },
+    {
+      "column": "fundrev_source_row_date_lag1",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 95990,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2010-01-04",
+        "2010-01-04",
+        "2010-01-04"
+      ]
+    }
+  ]
+}

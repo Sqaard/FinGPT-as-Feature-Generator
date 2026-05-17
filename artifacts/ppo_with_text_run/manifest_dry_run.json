@@ -1,0 +1,82 @@
+{
+  "status": "dry_run_ok",
+  "panel_header": {
+    "panel": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv",
+    "column_count": 154,
+    "date_column": "date",
+    "ticker_column": "tic",
+    "text_feature_columns": [
+      "text_relevance_to_portfolio",
+      "text_sentiment_direction",
+      "text_price_impact_direction",
+      "text_risk_intensity",
+      "text_uncertainty_intensity",
+      "text_opportunity_intensity",
+      "text_forward_looking_intensity",
+      "text_earnings_guidance_impact",
+      "text_macro_financial_conditions_impact",
+      "text_company_event_risk_impact"
+    ],
+    "missing_text_feature_columns": []
+  },
+  "sample_rows_checked": 1000,
+  "numeric_feature_column_count": 147,
+  "feature_audit_sample": {
+    "raw_feature_column_count": 151,
+    "numeric_feature_column_count": 147,
+    "coerced_numeric_columns": [],
+    "excluded_non_numeric_columns": [
+      {
+        "column": "date_available",
+        "dtype": "object",
+        "reason": "non-numeric helper/provenance column",
+        "non_missing": 1000,
+        "numeric_parseable": 0,
+        "sample_values": [
+          "2009-10-19",
+          "2009-10-19",
+          "2009-10-19"
+        ]
+      },
+      {
+        "column": "external_fred_daily_date_used_lag1",
+        "dtype": "object",
+        "reason": "non-numeric helper/provenance column",
+        "non_missing": 999,
+        "numeric_parseable": 0,
+        "sample_values": [
+          "2010-01-04",
+          "2010-01-05",
+          "2010-01-06"
+        ]
+      },
+      {
+        "column": "external_fred_weekly_date_used_lag5",
+        "dtype": "object",
+        "reason": "non-numeric helper/provenance column",
+        "non_missing": 995,
+        "numeric_parseable": 0,
+        "sample_values": [
+          "2010-01-04",
+          "2010-01-05",
+          "2010-01-06"
+        ]
+      },
+      {
+        "column": "fundrev_source_row_date_lag1",
+        "dtype": "object",
+        "reason": "non-numeric helper/provenance column",
+        "non_missing": 999,
+        "numeric_parseable": 0,
+        "sample_values": [
+          "2010-01-04",
+          "2010-01-05",
+          "2010-01-06"
+        ]
+      }
+    ]
+  },
+  "rl_project_exists": true,
+  "stage0_audit_exists": true,
+  "training_was_not_started": true
+}

@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "benchmark_csv": "ppo_without_text_BENCHMARK\\benchmark_summary.csv",
+  "ppo_with_text_csv": "artifacts\\ppo_with_text_run\\results\\ppo_with_text_summary_for_comparison.csv",
+  "comparison_summary": "artifacts\\ppo_text_vs_benchmark\\results\\comparison_summary.csv",
+  "comparison_deltas": "artifacts\\ppo_text_vs_benchmark\\results\\comparison_deltas.csv",
+  "report": "artifacts\\ppo_text_vs_benchmark\\report.md",
+  "figure": "artifacts\\ppo_text_vs_benchmark\\figures\\return_sharpe_drawdown.svg"
+}

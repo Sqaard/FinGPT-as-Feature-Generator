@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320">
+<rect width="100%" height="100%" fill="#fff8ef"/>
+<text x="24" y="26" font-family="Arial" font-size="18" font-weight="700" fill="#2f261f">PPO Text Ablation Comparison</text>
+<line x1="90" y1="160" x2="240" y2="160" stroke="#d9c7b8"/>
+<text x="90" y="286" font-family="Arial" font-size="13" font-weight="700" fill="#2f261f">Return</text>
+<rect x="106" y="160" width="34" height="39.04799083139597" rx="4" fill="#d88b38"/>
+<text x="106" y="215.04799083139596" font-family="Arial" font-size="10" fill="#2f261f">-0.073</text>
+<rect x="150" y="160" width="34" height="45.957717604029824" rx="4" fill="#7fb069"/>
+<text x="150" y="221.95771760402982" font-family="Arial" font-size="10" fill="#2f261f">-0.086</text>
+<rect x="194" y="160" width="34" height="57.52749266518417" rx="4" fill="#b85c5c"/>
+<text x="194" y="233.52749266518418" font-family="Arial" font-size="10" fill="#2f261f">-0.107</text>
+<rect x="238" y="160" width="34" height="105" rx="4" fill="#6c8ebf"/>
+<text x="238" y="281" font-family="Arial" font-size="10" fill="#2f261f">-0.196</text>
+<line x1="300" y1="160" x2="450" y2="160" stroke="#d9c7b8"/>
+<text x="300" y="286" font-family="Arial" font-size="13" font-weight="700" fill="#2f261f">Sharpe</text>
+<rect x="316" y="160" width="34" height="24.552085104191242" rx="4" fill="#d88b38"/>
+<text x="316" y="200.55208510419124" font-family="Arial" font-size="10" fill="#2f261f">-0.214</text>
+<rect x="360" y="160" width="34" height="37.51650387416139" rx="4" fill="#7fb069"/>
+<text x="360" y="213.5165038741614" font-family="Arial" font-size="10" fill="#2f261f">-0.327</text>
+<rect x="404" y="160" width="34" height="48.53052336015372" rx="4" fill="#b85c5c"/>
+<text x="404" y="224.53052336015372" font-family="Arial" font-size="10" fill="#2f261f">-0.423</text>
+<rect x="448" y="160" width="34" height="105" rx="4" fill="#6c8ebf"/>
+<text x="448" y="281" font-family="Arial" font-size="10" fill="#2f261f">-0.915</text>
+<line x1="510" y1="160" x2="660" y2="160" stroke="#d9c7b8"/>
+<text x="510" y="286" font-family="Arial" font-size="13" font-weight="700" fill="#2f261f">Max DD</text>
+<rect x="526" y="160" width="34" height="95.19809880588575" rx="4" fill="#d88b38"/>
+<text x="526" y="271.19809880588576" font-family="Arial" font-size="10" fill="#2f261f">-0.202</text>
+<rect x="570" y="160" width="34" height="98.02576510705066" rx="4" fill="#7fb069"/>
+<text x="570" y="274.0257651070507" font-family="Arial" font-size="10" fill="#2f261f">-0.208</text>
+<rect x="614" y="160" width="34" height="103.20981999251968" rx="4" fill="#b85c5c"/>
+<text x="614" y="279.20981999251967" font-family="Arial" font-size="10" fill="#2f261f">-0.219</text>
+<rect x="658" y="160" width="34" height="105" rx="4" fill="#6c8ebf"/>
+<text x="658" y="281" font-family="Arial" font-size="10" fill="#2f261f">-0.223</text>
+<rect x="24" y="299" width="10" height="10" fill="#d88b38"/>
+<text x="40" y="308" font-family="Arial" font-size="11" fill="#2f261f">PPO without text</text>
+<rect x="204" y="299" width="10" height="10" fill="#7fb069"/>
+<text x="220" y="308" font-family="Arial" font-size="11" fill="#2f261f">Equal-weight Buy&amp;Hold</text>
+<rect x="384" y="299" width="10" height="10" fill="#b85c5c"/>
+<text x="400" y="308" font-family="Arial" font-size="11" fill="#2f261f">DJI baseline</text>
+<rect x="564" y="299" width="10" height="10" fill="#6c8ebf"/>
+<text x="580" y="308" font-family="Arial" font-size="11" fill="#2f261f">PPO with text</text>
+</svg>

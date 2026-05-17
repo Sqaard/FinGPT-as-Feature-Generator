@@ -1,0 +1,135 @@
+{
+  "status": "completed",
+  "panel": "c:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\Toy_Example\\artifacts\\processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv",
+  "model_path": "c:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\Toy_Example\\artifacts\\ppo_with_text_run\\checkpoints\\ppo_with_text_custom_custom_350000_steps.zip",
+  "selected_config": "custom_custom",
+  "timesteps": 350000,
+  "model_kwargs": {
+    "ent_coef": 0.01,
+    "n_steps": 2048,
+    "learning_rate": 0.00025,
+    "batch_size": 128
+  },
+  "resume_from_checkpoint": "c:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\Toy_Example\\artifacts\\ppo_with_text_run\\checkpoints\\ppo_with_text_checkpoint_200000_steps.zip",
+  "feature_column_count": 147,
+  "raw_feature_column_count": 151,
+  "text_features_used": [
+    "text_relevance_to_portfolio",
+    "text_sentiment_direction",
+    "text_price_impact_direction",
+    "text_risk_intensity",
+    "text_uncertainty_intensity",
+    "text_opportunity_intensity",
+    "text_forward_looking_intensity",
+    "text_earnings_guidance_impact",
+    "text_macro_financial_conditions_impact",
+    "text_company_event_risk_impact"
+  ],
+  "excluded_non_numeric_feature_columns": [
+    {
+      "column": "date_available",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 96019,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2009-10-19",
+        "2009-10-19",
+        "2009-10-19"
+      ]
+    },
+    {
+      "column": "external_fred_daily_date_used_lag1",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 95990,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2010-01-04",
+        "2010-01-04",
+        "2010-01-04"
+      ]
+    },
+    {
+      "column": "external_fred_weekly_date_used_lag5",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 95874,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2010-01-04",
+        "2010-01-04",
+        "2010-01-04"
+      ]
+    },
+    {
+      "column": "fundrev_source_row_date_lag1",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 95990,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2010-01-04",
+        "2010-01-04",
+        "2010-01-04"
+      ]
+    }
+  ],
+  "train_window": [
+    "2010-01-04",
+    "2021-09-30"
+  ],
+  "validation_window": [
+    "2021-10-01",
+    "2021-12-31"
+  ],
+  "test_window": [
+    "2022-01-03",
+    "2023-02-28"
+  ],
+  "validation_summary": {
+    "period": "validation",
+    "strategy": "PPO with text",
+    "strategy_type": "RL",
+    "initial_value": 1000000.0,
+    "final_value": 1025259.121964481,
+    "return_pct": 2.525912196448088,
+    "annual_return": 0.10320815965574837,
+    "cumulative_returns": 0.0252591219644811,
+    "annual_volatility": 0.13338720646123903,
+    "sharpe_ratio": 0.8139492919871857,
+    "calmar_ratio": 1.4165467889752077,
+    "stability": 0.08912928542174253,
+    "max_drawdown": -0.07285898387473222,
+    "omega_ratio": 1.1586031231890108,
+    "sortino_ratio": 1.1562329899680928,
+    "tail_ratio": 1.0000952432258376,
+    "daily_value_at_risk": -0.01637437338979969,
+    "feature_set": "mistral_text_10",
+    "selected_config": "custom_custom",
+    "text_feature_count": 10
+  },
+  "test_summary": {
+    "period": "test",
+    "strategy": "PPO with text",
+    "strategy_type": "RL",
+    "initial_value": 1000000.0,
+    "final_value": 803971.9883911284,
+    "return_pct": -19.60280116088716,
+    "annual_return": -0.17271028548141953,
+    "cumulative_returns": -0.19602801160887184,
+    "annual_volatility": 0.18845679735648802,
+    "sharpe_ratio": -0.9151972186738708,
+    "calmar_ratio": -0.7751858001910847,
+    "stability": 0.7159821305564146,
+    "max_drawdown": -0.22279856705172635,
+    "omega_ratio": 0.8547457832889248,
+    "sortino_ratio": -1.2413351341005638,
+    "tail_ratio": 0.8697165406969267,
+    "daily_value_at_risk": -0.02442774984523963,
+    "feature_set": "mistral_text_10",
+    "selected_config": "custom_custom",
+    "text_feature_count": 10
+  },
+  "results_dir": "c:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\Toy_Example\\artifacts\\ppo_with_text_run\\results"
+}

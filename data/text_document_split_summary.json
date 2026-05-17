@@ -1,0 +1,22 @@
+{
+  "official_macro_documents.jsonl": {
+    "train": 15574,
+    "test": 2666,
+    "missing_or_other": 0
+  },
+  "sec_filing_exhibits_documents.jsonl": {
+    "train": 486,
+    "test": 169,
+    "missing_or_other": 0
+  },
+  "company_ir_core_documents.jsonl": {
+    "train": 317,
+    "test": 527,
+    "missing_or_other": 0
+  },
+  "company_ir_review_documents.jsonl": {
+    "train": 69,
+    "test": 197,
+    "missing_or_other": 0
+  }
+}

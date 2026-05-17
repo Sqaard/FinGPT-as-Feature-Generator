@@ -1,0 +1,57 @@
+{
+  "feature_set": "text_to_numerical_v1",
+  "description": "First PPO-facing trading/state text feature set. These are not document-quality fields; they are intended to describe market/company/portfolio state extracted from text.",
+  "features": [
+    {
+      "name": "text_relevance_to_portfolio",
+      "range": [0, 1],
+      "meaning": "How relevant the document is for the portfolio/ticker."
+    },
+    {
+      "name": "sentiment_direction",
+      "range": [-1, 1],
+      "meaning": "Overall financial tone: negative, neutral, positive."
+    },
+    {
+      "name": "price_impact_direction",
+      "range": [-1, 1],
+      "meaning": "Expected directional pressure from the document, not a trading decision."
+    },
+    {
+      "name": "risk_intensity",
+      "range": [0, 1],
+      "meaning": "Strength of downside risk discussed or introduced by the document."
+    },
+    {
+      "name": "uncertainty_intensity",
+      "range": [0, 1],
+      "meaning": "Amount of uncertainty, conditionality, volatility, or unclear outlook."
+    },
+    {
+      "name": "opportunity_intensity",
+      "range": [0, 1],
+      "meaning": "Strength of upside, growth, margin, demand, buyback, or dividend opportunity."
+    },
+    {
+      "name": "forward_looking_intensity",
+      "range": [0, 1],
+      "meaning": "Amount of guidance, outlook, expectation, or future-looking content."
+    },
+    {
+      "name": "earnings_guidance_impact",
+      "range": [-1, 1],
+      "meaning": "Impact of earnings, revenue, EPS, margins, or guidance."
+    },
+    {
+      "name": "macro_financial_conditions_impact",
+      "range": [-1, 1],
+      "meaning": "Impact of rates, credit, inflation, volatility, labor, energy, or broad macro conditions."
+    },
+    {
+      "name": "company_event_risk_impact",
+      "range": [-1, 1],
+      "meaning": "Impact of legal, regulatory, supply-chain, demand, margin, or company-specific risk."
+    }
+  ]
+}
+

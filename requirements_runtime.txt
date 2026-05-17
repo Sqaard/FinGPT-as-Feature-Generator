@@ -1,0 +1,9 @@
+# Runtime used for the PPO scripts.
+# Exact environment reproducibility may require conda because FinRL pulls
+# several finance/backtesting dependencies.
+pandas==2.2.2
+numpy==1.26.4
+torch==2.8.0
+stable-baselines3==2.7.0
+pyfolio==0.9.9
+finrl

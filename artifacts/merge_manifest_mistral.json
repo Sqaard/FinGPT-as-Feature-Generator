@@ -1,0 +1,26 @@
+{
+  "base_panel": "data\\processed_final_fixed_external_lagclean_full.csv",
+  "text_features": "artifacts\\text_features_mistral.csv",
+  "output": "artifacts\\processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv",
+  "rows_written": 96019,
+  "calendar_dates": 3311,
+  "tickers": 29,
+  "stock_date_ticker_feature_keys": 1042,
+  "market_feature_dates": 3310,
+  "text_matched_rows": 95990,
+  "skipped_feature_rows": 1171,
+  "text_feature_columns": [
+    "text_relevance_to_portfolio",
+    "text_sentiment_direction",
+    "text_price_impact_direction",
+    "text_risk_intensity",
+    "text_uncertainty_intensity",
+    "text_opportunity_intensity",
+    "text_forward_looking_intensity",
+    "text_earnings_guidance_impact",
+    "text_macro_financial_conditions_impact",
+    "text_company_event_risk_impact"
+  ],
+  "missing_text_policy": "filled_with_zero",
+  "date_policy": "available_at date mapped to first trading date >= available_at date"
+}
