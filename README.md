@@ -40,6 +40,8 @@ flowchart LR
 
 | setup | OOS return | OOS Sharpe | OOS max DD |
 |---|---:|---:|---:|
+| `custom_custom` | `-7.29%` | `-0.2140` | `-20.20%` |
+| `custom_custom+text10` | `-19.60%` | `-0.9152` | `-22.28%` |
 | `R6c baseline` | `-1.92%` | `-0.1015` | `-11.78%` |
 | `R6c + raw_text10` | `-1.61%` | `-0.0640` | `-12.04%` |
 
