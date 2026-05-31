@@ -36,6 +36,17 @@ flowchart LR
 
 ![PPO text ablation](artifacts/ppo_text_vs_benchmark/figures/return_sharpe_drawdown.svg)
 
+## DRL R6c Frozen OOS
+
+| setup | OOS return | OOS Sharpe | OOS max DD |
+|---|---:|---:|---:|
+| `R6c baseline` | `-1.92%` | `-0.1015` | `-11.78%` |
+| `R6c + raw_text10` | `-1.61%` | `-0.0640` | `-12.04%` |
+
+The current best text candidate for the DRL branch is `R6c + raw_text10`.
+It improves frozen OOS return and Sharpe versus the R6c baseline, while max
+drawdown is slightly worse.
+
 ## Main Files
 
 | Path | Purpose |

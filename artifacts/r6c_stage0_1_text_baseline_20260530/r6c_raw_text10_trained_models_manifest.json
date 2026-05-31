@@ -1,0 +1,169 @@
+{
+  "status": "complete",
+  "artifact": "R6c + raw_text10 trained models and OOS evaluation",
+  "variant": "R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1",
+  "zip_path": "C:\\Users\\ivanp\\OneDrive\\\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b\\\u0434\u043e\u043a\u0438+\u0447\u0435\u0440\u0447\u0438\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\r6c_raw_text10_trained_models_and_oos.zip",
+  "zip_size_bytes": 43005594,
+  "zip_sha256": "dd258bd95dbc7f45be6b9ce31230dbba3de03e03dfe827925d38ac0a2146600e",
+  "folds": [
+    "fold_2018",
+    "fold_2019",
+    "fold_2020",
+    "fold_2021"
+  ],
+  "selected_oos_fold": "fold_2021",
+  "oos_window": {
+    "start": "2022-01-03",
+    "end": "2023-02-28"
+  },
+  "metrics": {
+    "r6c_baseline": {
+      "oos_return": -0.0192271551503636,
+      "oos_sharpe": -0.1014883191013421,
+      "oos_max_drawdown": -0.117760585396162
+    },
+    "r6c_raw_text10": {
+      "oos_return": -0.0161008745367755,
+      "oos_sharpe": -0.0640384696018273,
+      "oos_max_drawdown": -0.1204338445850309
+    }
+  },
+  "entries": [
+    {
+      "path": "rl_stage0_1_r6c_project/README_R6C_TEXT_STAGING.md",
+      "size_bytes": 519
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/configs/stage0_1_r6c_deepseek_v2_text.yaml",
+      "size_bytes": 22935
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/configs/stage0_1_walk_forward_folds.csv",
+      "size_bytes": 637
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/run_r6c_text_full.ps1",
+      "size_bytes": 235
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/run_r6c_text_smoke.ps1",
+      "size_bytes": 274
+    },
+    {
+      "path": "R6C_TEXT_LAUNCH_PREP.md",
+      "size_bytes": 4020
+    },
+    {
+      "path": "r6c_text_frozen_vs_baseline_fold2021.csv",
+      "size_bytes": 355
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/walk_forward_validation_results.csv",
+      "size_bytes": 86429
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/walk_forward_variant_summary.csv",
+      "size_bytes": 441
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_frozen_oos/frozen_oos_results.csv",
+      "size_bytes": 45240
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_frozen_oos/frozen_oos_variant_summary.csv",
+      "size_bytes": 296
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_frozen_oos/frozen_oos_manifest.json",
+      "size_bytes": 1950
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2018/model.zip",
+      "size_bytes": 14144546
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2018/metadata.json",
+      "size_bytes": 314409
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2018/validation_summary.csv",
+      "size_bytes": 42601
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2018/train_trace_summary.csv",
+      "size_bytes": 45580
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2018/discovered_hierarchy/cluster_summary.csv",
+      "size_bytes": 1258
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2019/model.zip",
+      "size_bytes": 14144546
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2019/metadata.json",
+      "size_bytes": 338842
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2019/validation_summary.csv",
+      "size_bytes": 44980
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2019/train_trace_summary.csv",
+      "size_bytes": 45410
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2019/discovered_hierarchy/cluster_summary.csv",
+      "size_bytes": 1264
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2020/model.zip",
+      "size_bytes": 14144546
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2020/metadata.json",
+      "size_bytes": 359876
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2020/validation_summary.csv",
+      "size_bytes": 44412
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2020/train_trace_summary.csv",
+      "size_bytes": 45037
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2020/discovered_hierarchy/cluster_summary.csv",
+      "size_bytes": 1139
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2021/model.zip",
+      "size_bytes": 14144546
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2021/metadata.json",
+      "size_bytes": 381818
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2021/validation_summary.csv",
+      "size_bytes": 44139
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2021/train_trace_summary.csv",
+      "size_bytes": 45048
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2021/discovered_hierarchy/cluster_summary.csv",
+      "size_bytes": 1115
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_frozen_oos/per_fold/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2021/frozen_test_summary.csv",
+      "size_bytes": 44753
+    },
+    {
+      "path": "rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_frozen_oos/per_fold/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2021/frozen_test_daily.csv",
+      "size_bytes": 4629092
+    }
+  ]
+}
