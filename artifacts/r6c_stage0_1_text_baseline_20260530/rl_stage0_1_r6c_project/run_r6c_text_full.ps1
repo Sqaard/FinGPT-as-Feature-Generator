@@ -1,0 +1,1 @@
+& "C:\Users\ivanp\anaconda3\envs\tensorflow\python.exe" -m src.ppo.stage0_1_train --config configs/stage0_1_r6c_deepseek_v2_text.yaml --variants R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1

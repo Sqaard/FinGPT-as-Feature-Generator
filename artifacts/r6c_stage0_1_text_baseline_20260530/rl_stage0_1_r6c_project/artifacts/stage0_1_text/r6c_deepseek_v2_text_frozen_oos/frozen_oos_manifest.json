@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "config": "C:\\Users\\ivanp\\OneDrive\\\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b\\\u0434\u043e\u043a\u0438+\u0447\u0435\u0440\u0447\u0438\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\rl_stage0_1_r6c_project\\configs\\stage0_1_r6c_deepseek_v2_text.yaml",
+  "run_root": "C:\\Users\\ivanp\\OneDrive\\\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b\\\u0434\u043e\u043a\u0438+\u0447\u0435\u0440\u0447\u0438\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\rl_stage0_1_r6c_project\\artifacts\\stage0_1_text\\r6c_deepseek_v2_text_state_concat",
+  "out_dir": "C:\\Users\\ivanp\\OneDrive\\\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b\\\u0434\u043e\u043a\u0438+\u0447\u0435\u0440\u0447\u0438\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\rl_stage0_1_r6c_project\\artifacts\\stage0_1_text\\r6c_deepseek_v2_text_frozen_oos",
+  "results_csv": "C:\\Users\\ivanp\\OneDrive\\\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b\\\u0434\u043e\u043a\u0438+\u0447\u0435\u0440\u0447\u0438\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\rl_stage0_1_r6c_project\\artifacts\\stage0_1_text\\r6c_deepseek_v2_text_frozen_oos\\frozen_oos_results.csv",
+  "variant_summary_csv": "C:\\Users\\ivanp\\OneDrive\\\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b\\\u0434\u043e\u043a\u0438+\u0447\u0435\u0440\u0447\u0438\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\rl_stage0_1_r6c_project\\artifacts\\stage0_1_text\\r6c_deepseek_v2_text_frozen_oos\\frozen_oos_variant_summary.csv",
+  "folds": [
+    "fold_2021"
+  ]
+}

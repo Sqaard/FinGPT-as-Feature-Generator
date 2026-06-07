@@ -1,0 +1,63 @@
+# Stage 1 self-supervised primitive discovery.
+
+experiment:
+  name: stage1_vqvae_current_teacher
+  status: draft
+  purpose: >
+    Discover discrete behavior primitives from frozen PPO policy representations
+    and behavior windows.
+
+inputs:
+  main_npz: artifacts/stage0/teacher_export/interpretable_no_gru_custom_custom_350000_final/stage0_teacher_joseph_package.npz
+  crossfold_npz: artifacts/stage0/teacher_export/interpretable_no_gru_custom_custom_350000_final/stage0_teacher_crossfold_hidden_states.npz
+  manifest: artifacts/stage0/teacher_export/interpretable_no_gru_custom_custom_350000_final/export_manifest.json
+
+datasets:
+  train_period: train
+  validation_period: validation
+  test_period: test
+  crossfold_periods:
+    - cross_2010_2015
+    - cross_2016_2021_train
+
+model_grid:
+  variants:
+    - hidden_only_vqvae
+    - windowed_transformer_vqvae
+    - joint_policy_behavior_vqvae
+  K: [16, 32, 64, 128]
+  window_lengths: [1, 3, 5, 10, 20]
+  commitment_beta: [0.1, 0.25, 0.5, 1.0]
+  distance: [l2, cosine]
+
+vq:
+  kmeans_initialization: true
+  ema_codebook_updates: true
+  stale_code_reset: true
+  cosine_similarity_option: true
+
+negative_controls:
+  random_codebook: true
+  shuffled_labels: true
+  hmm_regime_only: true
+  kmeans_on_portfolio_weights: true
+  previous_code_markov_baseline: true
+  random_hidden_directions: true
+
+success_gates:
+  codebook_utilization_min: 0.70
+  perplexity_fraction_min: 0.50
+  median_run_length_min_days: 3
+  crossfold_nmi_min: 0.40
+  action_fidelity_lift_required: true
+  beat_hmm_regime_baseline_required: true
+  max_single_code_usage: 0.50
+
+outputs:
+  root: artifacts/stage1/vqvae
+  primitive_assignments: artifacts/stage1/vqvae/primitive_assignments.parquet
+  codebook_metrics: artifacts/stage1/vqvae/codebook_metrics.csv
+  crossfold_stability: artifacts/stage1/vqvae/crossfold_stability.csv
+  negative_controls: artifacts/stage1/vqvae/negative_controls.csv
+  model_ranking: artifacts/stage1/vqvae/model_ranking.csv
+  report: artifacts/stage1/vqvae/STAGE1_PRIMITIVE_DISCOVERY_REPORT.md

@@ -7,3 +7,5 @@ __pycache__/
 *.log
 tmp/
 temp/
+
+/artifacts/r6c_stage0_1_text_baseline_20260530/rl_stage0_1_r6c_project/artifacts/r6c_text_feature_group_ablation/

@@ -1,0 +1,50 @@
+# Stage 1 preflight before VQ-VAE primitive discovery.
+
+experiment:
+  name: stage1_preflight_current_teacher
+  status: draft
+  purpose: >
+    Audit whether the frozen Stage 0 teacher export is suitable for primitive
+    discovery before training VQ-VAE models.
+
+inputs:
+  teacher_export_dir: artifacts/stage0/teacher_export/interpretable_no_gru_custom_custom_350000_final
+  main_npz: artifacts/stage0/teacher_export/interpretable_no_gru_custom_custom_350000_final/stage0_teacher_joseph_package.npz
+  crossfold_npz: artifacts/stage0/teacher_export/interpretable_no_gru_custom_custom_350000_final/stage0_teacher_crossfold_hidden_states.npz
+  manifest: artifacts/stage0/teacher_export/interpretable_no_gru_custom_custom_350000_final/export_manifest.json
+
+checks:
+  hidden_state:
+    variance_floor: 1.0e-8
+    max_nan_fraction: 0.0
+    compute_pca: true
+    compute_time_predictability: true
+    compute_regime_predictability: true
+  action:
+    compute_saturation_rate: true
+    compute_raw_outside_box_rate: true
+    compute_action_autocorrelation: true
+    compute_previous_action_baseline: true
+  portfolio:
+    compute_turnover: true
+    compute_cash_constraint_proxy: true
+    compute_hhi: true
+    compute_drawdown: true
+  context:
+    verify_date_alignment: true
+    verify_context_missingness: true
+    compute_context_correlations: true
+
+outputs:
+  report: artifacts/stage1/preflight/STAGE1_PREFLIGHT_REPORT.md
+  metrics_csv: artifacts/stage1/preflight/preflight_metrics.csv
+  hidden_quality_csv: artifacts/stage1/preflight/hidden_state_quality.csv
+  action_saturation_csv: artifacts/stage1/preflight/action_saturation.csv
+  readiness_json: artifacts/stage1/preflight/primitive_readiness.json
+
+readiness_gates:
+  hidden_finite: true
+  context_finite: true
+  date_alignment_exact: true
+  report_action_saturation_as_risk: true
+  allow_discovery_if_saturation_high: true
