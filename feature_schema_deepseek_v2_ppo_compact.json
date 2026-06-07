@@ -1,0 +1,56 @@
+{
+  "feature_set": "deepseek_ppo_compact_v2",
+  "description": "DeepSeek-only PPO-facing text feature contract selected after schema diagnostics. It keeps compact directional/risk state features and adds source-quality gates so downstream PPO can separate investable signal from boilerplate.",
+  "features": [
+    {
+      "name": "text_alpha_direction",
+      "range": [-1, 1],
+      "meaning": "Net investable directional evidence after balancing positive and negative document signals."
+    },
+    {
+      "name": "text_downside_risk",
+      "range": [0, 1],
+      "meaning": "Net downside risk intensity from the document."
+    },
+    {
+      "name": "text_uncertainty",
+      "range": [0, 1],
+      "meaning": "Uncertainty, conditionality, weak modal language, or unclear outlook."
+    },
+    {
+      "name": "text_macro_stress",
+      "range": [0, 1],
+      "meaning": "Macro or cross-asset stress relevant to the ticker or portfolio."
+    },
+    {
+      "name": "text_earnings_pressure",
+      "range": [-1, 1],
+      "meaning": "Direction and severity of earnings, revenue, margin, EPS, or guidance pressure."
+    },
+    {
+      "name": "text_balance_sheet_stress",
+      "range": [0, 1],
+      "meaning": "Leverage, liquidity, funding, working-capital, refinancing, or solvency pressure."
+    },
+    {
+      "name": "text_signal_confidence",
+      "range": [0, 1],
+      "meaning": "Confidence that the text signal is specific, timely, and not boilerplate."
+    },
+    {
+      "name": "text_evidence_specificity",
+      "range": [0, 1],
+      "meaning": "How specific and document-grounded the evidence is, rather than vague or generic."
+    },
+    {
+      "name": "text_numeric_evidence_density",
+      "range": [0, 1],
+      "meaning": "Density of useful numeric financial, operating, margin, cash-flow, balance-sheet, or guidance evidence."
+    },
+    {
+      "name": "text_boilerplate_intensity",
+      "range": [0, 1],
+      "meaning": "Generic repeated disclosure or legal boilerplate intensity that should reduce trust in semantic signal."
+    }
+  ]
+}
