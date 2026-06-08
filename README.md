@@ -1,7 +1,19 @@
 # FinGPT as Feature Generator
 
-Small, portable experiment package for testing whether causal financial text
-features improve a Dow 30 PPO trading agent.
+## Abstract
+
+This project tests whether leakage-safe financial text features can improve a
+portfolio reinforcement learning agent. The feature engine converts causal SEC,
+macro, and company text evidence into fixed numerical features, merges them into
+the RL panel, and evaluates them through controlled OOS ablations.
+
+The current best result is modest but useful: on the frozen 2022-2023 OOS window,
+`CHRL model + raw_text10` improves return from `-1.92%` to `-1.61%` and Sharpe
+from `-0.1015` to `-0.0640` versus the `CHRL model` baseline. Max drawdown moves
+from `-11.78%` to `-12.04%`, so the text signal helps return/risk-adjusted score
+but still needs drawdown-aware filtering.
+
+![CHRL raw_text10 OOS comparison](artifacts/chrl_raw_text10_oos/figures/oos_return_sharpe_drawdown.svg)
 
 ## Snapshot
 
@@ -11,8 +23,8 @@ features improve a Dow 30 PPO trading agent.
 | PPO panel | `96,019` daily stock rows |
 | Text extractor | `mistral-small-latest` |
 | Text features | `10` numerical PPO features |
-| Baseline | PPO without text, `350k` steps |
-| First result | negative ablation; use it to debug features |
+| Baseline | `CHRL model` without text |
+| Current result | `CHRL model + raw_text10` improves OOS return and Sharpe |
 | Large files | tracked with Git LFS |
 
 ## Pipeline
@@ -21,32 +33,21 @@ features improve a Dow 30 PPO trading agent.
 flowchart LR
   A["SEC / Macro / Company IR documents"] --> B["LLM text-to-numerical extraction"]
   B --> C["Daily ticker panel merge"]
-  C --> D["PPO with text features"]
-  E["PPO without text benchmark"] --> F["Ablation report"]
+  C --> D["CHRL model with text features"]
+  E["CHRL model without text benchmark"] --> F["Ablation report"]
   D --> F
   F --> G["Feature normalization / ablation / PPO-side changes"]
 ```
 
-## First Ablation
-
-| Strategy | Return | Sharpe | Max DD |
-|---|---:|---:|---:|
-| PPO without text | `-7.29%` | `-0.214` | `-20.2%` |
-| PPO with Mistral text | `-19.60%` | `-0.915` | `-22.28%` |
-
-![PPO text ablation](artifacts/ppo_text_vs_benchmark/figures/return_sharpe_drawdown.svg)
-
-## DRL R6c Frozen OOS
+## CHRL Frozen OOS
 
 | setup | OOS return | OOS Sharpe | OOS max DD |
 |---|---:|---:|---:|
-| `custom_custom` | `-7.29%` | `-0.2140` | `-20.20%` |
-| `custom_custom+text10` | `-19.60%` | `-0.9152` | `-22.28%` |
-| `R6c baseline` | `-1.92%` | `-0.1015` | `-11.78%` |
-| `R6c + raw_text10` | `-1.61%` | `-0.0640` | `-12.04%` |
+| `CHRL model` | `-1.92%` | `-0.1015` | `-11.78%` |
+| `CHRL model + raw_text10` | `-1.61%` | `-0.0640` | `-12.04%` |
 
-The current best text candidate for the DRL branch is `R6c + raw_text10`.
-It improves frozen OOS return and Sharpe versus the R6c baseline, while max
+The current best text candidate is `CHRL model + raw_text10`.
+It improves frozen OOS return and Sharpe versus the CHRL baseline, while max
 drawdown is slightly worse.
 
 ## Main Files
@@ -62,31 +63,3 @@ drawdown is slightly worse.
 | `ppo_without_text_BENCHMARK/` | frozen baseline model and metrics |
 | `rl_stage0_project/` | copied local PPO Stage0 code |
 | `train_ppo_with_text.ipynb` | notebook wrapper for training and comparison |
-
-## Commands
-
-| Step | Command |
-|---|---|
-| Extract | `python scripts/01_extract_text_features_mistral.py --input data/train_2010_2021 --input data/test_2021_2023 --output artifacts/text_features_mistral.csv` |
-| Merge | `python scripts/02_merge_text_features_with_prices.py --base-panel data/processed_final_fixed_external_lagclean_full.csv --text-features artifacts/text_features_mistral.csv --output artifacts/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv` |
-| Train | `python scripts/03_train_backtest_ppo_with_text.py --timesteps 350000` |
-| Compare | `python scripts/04_compare_with_benchmark.py` |
-
-## Team Lanes
-
-| Branch | Owner lane | Focus |
-|---|---|---|
-| `LLM` | 蔡志成 | extraction quality, prompts, model/API comparison |
-| `Features` | Tianyi Tan | feature selection, smoothing, macro vs company split |
-| `DRL` | Vanya | PPO-side changes, source quality, evaluation loop |
-
-## Next Experiments
-
-| Experiment | Why |
-|---|---|
-| Train-only normalization | PPO is scale-sensitive |
-| Feature-group ablations | find harmful vs useful feature families |
-| Macro vs company features | different text sources should not be mixed blindly |
-| 3d / 5d / 21d decay | filings and earnings releases matter beyond one day |
-| Reward/risk text use | text may work better as risk control than raw state |
-| Two-branch PPO policy | market features and text features need separate encoders |
