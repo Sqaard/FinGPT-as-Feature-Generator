@@ -1,0 +1,83 @@
+{
+  "raw_feature_column_count": 151,
+  "numeric_feature_column_count": 147,
+  "coerced_numeric_columns": [],
+  "excluded_non_numeric_columns": [
+    {
+      "column": "date_available",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 96019,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2009-10-19",
+        "2009-10-19",
+        "2009-10-19"
+      ]
+    },
+    {
+      "column": "external_fred_daily_date_used_lag1",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 95990,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2010-01-04",
+        "2010-01-04",
+        "2010-01-04"
+      ]
+    },
+    {
+      "column": "external_fred_weekly_date_used_lag5",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 95874,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2010-01-04",
+        "2010-01-04",
+        "2010-01-04"
+      ]
+    },
+    {
+      "column": "fundrev_source_row_date_lag1",
+      "dtype": "object",
+      "reason": "non-numeric helper/provenance column",
+      "non_missing": 95990,
+      "numeric_parseable": 0,
+      "sample_values": [
+        "2010-01-04",
+        "2010-01-04",
+        "2010-01-04"
+      ]
+    }
+  ],
+  "strategy_audit": {
+    "text_integration_strategy": "state_concat",
+    "risk_indicator_col": "turbulence",
+    "text_features_present": [
+      "text_alpha_direction",
+      "text_downside_risk",
+      "text_uncertainty",
+      "text_macro_stress",
+      "text_earnings_pressure",
+      "text_balance_sheet_stress",
+      "text_signal_confidence",
+      "text_evidence_specificity",
+      "text_numeric_evidence_density",
+      "text_boilerplate_intensity"
+    ],
+    "text_features_in_state": [
+      "text_alpha_direction",
+      "text_downside_risk",
+      "text_uncertainty",
+      "text_macro_stress",
+      "text_earnings_pressure",
+      "text_balance_sheet_stress",
+      "text_signal_confidence",
+      "text_evidence_specificity",
+      "text_numeric_evidence_density",
+      "text_boilerplate_intensity"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "local_project": "artifacts/r6c_stage0_1_text_baseline_20260530/rl_stage0_1_r6c_project",
+  "config": "configs/stage0_1_r6c_deepseek_v2_text.yaml",
+  "variant": "R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1",
+  "fold": "fold_2021",
+  "smoke_test": true,
+  "command": "python -m src.ppo.stage0_1_train --config configs/stage0_1_r6c_deepseek_v2_text.yaml --variants R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1 --folds fold_2021 --smoke-test --force",
+  "metrics": {
+    "return_pct": 0.05065587356876389,
+    "sharpe": 1.1430422832340847,
+    "max_drawdown": -0.0297832803007837,
+    "turnover_l1_mean": 0.005622188071587286,
+    "cash_weight_mean": 0.6398896954923987,
+    "projection_residual": 1.201787310256871e-16
+  },
+  "output_root": "artifacts/r6c_stage0_1_text_baseline_20260530/rl_stage0_1_r6c_project/artifacts/stage0_1_text/r6c_deepseek_v2_text_state_concat_smoke"
+}

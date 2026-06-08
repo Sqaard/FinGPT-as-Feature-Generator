@@ -1,0 +1,15 @@
+{
+  "status": "completed",
+  "doc_dirs": [
+    "data/train_2010_2021",
+    "data/test_2021_2023"
+  ],
+  "features": "artifacts/text_features_mistral.csv",
+  "panel": "artifacts/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv",
+  "document_quality": "artifacts/document_source_quality/document_quality.csv",
+  "source_family_quality": "artifacts/document_source_quality/source_family_quality.csv",
+  "report": "reports/drl_document_source_quality.md",
+  "documents_scored": 20005,
+  "source_families": 4,
+  "ppo_impact_note": "PPO impact requires trained ablations from Issue #6; this script adds event-style next-day return diagnostics now."
+}

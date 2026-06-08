@@ -1,0 +1,124 @@
+{
+  "source_panel": "artifacts/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv",
+  "train_window": [
+    "2010-01-04",
+    "2021-09-30"
+  ],
+  "fit_rows": 85753,
+  "validation_test_rows": 10266,
+  "text_feature_columns": [
+    "text_relevance_to_portfolio",
+    "text_sentiment_direction",
+    "text_price_impact_direction",
+    "text_risk_intensity",
+    "text_uncertainty_intensity",
+    "text_opportunity_intensity",
+    "text_forward_looking_intensity",
+    "text_earnings_guidance_impact",
+    "text_macro_financial_conditions_impact",
+    "text_company_event_risk_impact"
+  ],
+  "stats": {
+    "text_relevance_to_portfolio": {
+      "mean": 0.8820121585950347,
+      "std": 0.01874693563991497,
+      "median": 0.88,
+      "iqr": 1.0,
+      "clip_low": 0.86,
+      "clip_high": 0.9,
+      "train_min": 0.0,
+      "train_max": 0.9375
+    },
+    "text_sentiment_direction": {
+      "mean": -0.02511686687346216,
+      "std": 0.06693739788121285,
+      "median": 0.0,
+      "iqr": 0.05,
+      "clip_low": -0.36,
+      "clip_high": 0.075,
+      "train_min": -0.56,
+      "train_max": 0.35
+    },
+    "text_price_impact_direction": {
+      "mean": -0.02361343604305389,
+      "std": 0.05670945023977618,
+      "median": 0.0,
+      "iqr": 0.04,
+      "clip_low": -0.3,
+      "clip_high": 0.0,
+      "train_min": -0.54,
+      "train_max": 0.30625
+    },
+    "text_risk_intensity": {
+      "mean": 0.5250330695485872,
+      "std": 0.05617617710754069,
+      "median": 0.54,
+      "iqr": 0.06000000000000005,
+      "clip_low": 0.385714,
+      "clip_high": 0.68,
+      "train_min": 0.0,
+      "train_max": 0.8
+    },
+    "text_uncertainty_intensity": {
+      "mean": 0.09602710126759416,
+      "std": 0.02130799474416227,
+      "median": 0.1,
+      "iqr": 0.020000000000000004,
+      "clip_low": 0.057143,
+      "clip_high": 0.15,
+      "train_min": 0.0,
+      "train_max": 0.3625
+    },
+    "text_opportunity_intensity": {
+      "mean": 0.004638684209298801,
+      "std": 0.01726749196009517,
+      "median": 0.0,
+      "iqr": 1.0,
+      "clip_low": 0.0,
+      "clip_high": 0.085714,
+      "train_min": 0.0,
+      "train_max": 0.30625
+    },
+    "text_forward_looking_intensity": {
+      "mean": 0.1611287023777594,
+      "std": 0.027246520703629783,
+      "median": 0.16,
+      "iqr": 1.0,
+      "clip_low": 0.1,
+      "clip_high": 0.2,
+      "train_min": 0.0,
+      "train_max": 0.371429
+    },
+    "text_earnings_guidance_impact": {
+      "mean": 0.0002676510909239327,
+      "std": 0.00837915453896201,
+      "median": 0.0,
+      "iqr": 1.0,
+      "clip_low": 0.0,
+      "clip_high": 1e-12,
+      "train_min": -0.54,
+      "train_max": 0.3375
+    },
+    "text_macro_financial_conditions_impact": {
+      "mean": 0.6024555998274114,
+      "std": 0.20941991461540166,
+      "median": 0.72,
+      "iqr": 0.21999999999999997,
+      "clip_low": -0.2,
+      "clip_high": 0.78,
+      "train_min": -0.84,
+      "train_max": 0.8
+    },
+    "text_company_event_risk_impact": {
+      "mean": 9.262941238207408e-05,
+      "std": 0.00432835311144689,
+      "median": 0.0,
+      "iqr": 1.0,
+      "clip_low": 0.0,
+      "clip_high": 1e-12,
+      "train_min": -0.46,
+      "train_max": 0.225
+    }
+  },
+  "leakage_policy": "fit_on_train_window_only"
+}

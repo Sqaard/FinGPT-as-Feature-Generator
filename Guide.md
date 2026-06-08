@@ -188,3 +188,70 @@ Mistral features, added directly into the PPO state, hurts this policy. The next
 research step is to normalize and compress the text features, then run feature
 ablation to find which features or feature groups are harmful and which ones may
 carry useful signal.
+
+## Step 5 - DRL Lane: Train-Only Text Normalization
+
+GitHub issue: `#5`.
+
+```powershell
+python .\scripts\05_normalize_text_features_train_only.py
+```
+
+Outputs:
+
+- `artifacts/normalized_text_panels/train_only_scaler_stats.json`;
+- one normalized panel per method: `zscore`, `robust`, `clipped`,
+  `zscore_clipped`, `robust_clipped`;
+- `reports/drl_train_only_normalization.md`.
+
+All scaler parameters are fitted on `2010-01-04` to `2021-09-30` only.
+Validation/test rows are transformed with the frozen train-window parameters.
+
+## Step 6 - DRL Lane: PPO-Side Text Integration
+
+GitHub issue: `#6`.
+
+```powershell
+python .\scripts\06_build_ppo_text_integration_configs.py
+```
+
+Outputs:
+
+- `artifacts/ppo_text_integration_configs/experiment_matrix.csv`;
+- `artifacts/ppo_text_integration_configs/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_text_risk_overlay.csv`;
+- `reports/drl_ppo_text_integration.md`.
+
+The train wrapper accepts these strategies:
+
+```powershell
+python .\scripts\03_train_backtest_ppo_with_text.py `
+  --panel .\artifacts\normalized_text_panels\processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_robust_clipped.csv `
+  --text-integration-strategy two_branch_policy `
+  --timesteps 350000
+```
+
+Available strategies:
+
+- `state_concat`: text is appended to the PPO state;
+- `market_only`: control run, text columns excluded from the state;
+- `text_risk_overlay`: text changes risk control through `turbulence_text_overlay`;
+- `two_branch_policy`: market and text features pass through separate SB3 MLP branches.
+
+## Step 7 - DRL Lane: Document And Source Quality
+
+GitHub issue: `#7`.
+
+```powershell
+python .\scripts\07_score_document_source_quality.py
+```
+
+Outputs:
+
+- `artifacts/document_source_quality/document_quality.csv`;
+- `artifacts/document_source_quality/source_family_quality.csv`;
+- `reports/drl_document_source_quality.md`.
+
+The score combines relevance, signal density, timestamp integrity, source
+reliability, and extraction status. A next-day return diagnostic is included for
+ticker-level documents, but it is only an event-style sanity check, not an alpha
+claim.

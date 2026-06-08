@@ -1,0 +1,66 @@
+{
+  "status": "completed",
+  "source_panel": "artifacts/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv",
+  "output_dir": "artifacts/normalized_text_panels",
+  "report": "reports/drl_train_only_normalization.md",
+  "scaler_stats": "artifacts/normalized_text_panels/train_only_scaler_stats.json",
+  "methods": [
+    "zscore",
+    "robust",
+    "clipped",
+    "zscore_clipped",
+    "robust_clipped"
+  ],
+  "generated_panels": [
+    {
+      "method": "zscore",
+      "output": "artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_zscore.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 106.29738784379852,
+      "validation_test_max_abs_value": 46.18555035607816,
+      "train_non_zero_share": 1.0,
+      "validation_test_non_zero_share": 1.0
+    },
+    {
+      "method": "robust",
+      "output": "artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_robust.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 13.5,
+      "validation_test_max_abs_value": 11.5,
+      "train_non_zero_share": 0.3113267174326263,
+      "validation_test_non_zero_share": 0.5431034482758621
+    },
+    {
+      "method": "clipped",
+      "output": "artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_clipped.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 0.9,
+      "validation_test_max_abs_value": 0.9,
+      "train_non_zero_share": 0.5717339335066994,
+      "validation_test_non_zero_share": 0.6711864406779661
+    },
+    {
+      "method": "zscore_clipped",
+      "output": "artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_zscore_clipped.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 3.0,
+      "validation_test_max_abs_value": 3.0,
+      "train_non_zero_share": 1.0,
+      "validation_test_non_zero_share": 1.0
+    },
+    {
+      "method": "robust_clipped",
+      "output": "artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_robust_clipped.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 3.0,
+      "validation_test_max_abs_value": 3.0,
+      "train_non_zero_share": 0.3113267174326263,
+      "validation_test_non_zero_share": 0.5431034482758621
+    }
+  ]
+}

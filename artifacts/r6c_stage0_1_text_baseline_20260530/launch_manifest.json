@@ -1,0 +1,199 @@
+{
+  "status": "ready_to_launch",
+  "created_by": "scripts/11_prepare_r6c_stage0_1_text_baseline.py",
+  "source_rl_root_read_only": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph",
+  "out_root": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530",
+  "local_project": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\rl_stage0_1_r6c_project",
+  "variant": "R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1",
+  "merge_info": {
+    "source_raw_panel": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\features\\stage0_1_weight_features_raw.csv",
+    "text_panel": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\processed_final_fixed_external_lagclean_full_WITH_TEXT_DEEPSEEK_V2.csv",
+    "output_raw_panel": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\rl_stage0_1_r6c_project\\artifacts\\stage0_1\\features\\stage0_1_weight_features_raw_WITH_DEEPSEEK_V2_TEXT10.csv",
+    "rows": 96019,
+    "columns_before": 65,
+    "columns_after": 75,
+    "text_columns": [
+      "text_alpha_direction",
+      "text_downside_risk",
+      "text_uncertainty",
+      "text_macro_stress",
+      "text_earnings_pressure",
+      "text_balance_sheet_stress",
+      "text_signal_confidence",
+      "text_evidence_specificity",
+      "text_numeric_evidence_density",
+      "text_boilerplate_intensity"
+    ],
+    "missing_text_rows_zero_filled": 0,
+    "date_range": [
+      "2010-01-04",
+      "2023-02-28"
+    ],
+    "ticker_count": 29,
+    "text_non_zero_share": {
+      "text_alpha_direction": 0.5341755277601308,
+      "text_downside_risk": 0.9563523885897582,
+      "text_uncertainty": 0.777096199710474,
+      "text_macro_stress": 0.9345233755819161,
+      "text_earnings_pressure": 0.01913163019818994,
+      "text_balance_sheet_stress": 0.2276320311604995,
+      "text_signal_confidence": 0.9996979764421625,
+      "text_evidence_specificity": 0.9996979764421625,
+      "text_numeric_evidence_density": 0.9996979764421625,
+      "text_boilerplate_intensity": 0.9996979764421625
+    }
+  },
+  "config_info": {
+    "source_config": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\configs\\stage0_1_active_r_pipeline.yaml",
+    "output_config": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\rl_stage0_1_r6c_project\\configs\\stage0_1_r6c_deepseek_v2_text.yaml",
+    "local_project": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\rl_stage0_1_r6c_project",
+    "variant": "R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1",
+    "text_columns": [
+      "text_alpha_direction",
+      "text_downside_risk",
+      "text_uncertainty",
+      "text_macro_stress",
+      "text_earnings_pressure",
+      "text_balance_sheet_stress",
+      "text_signal_confidence",
+      "text_evidence_specificity",
+      "text_numeric_evidence_density",
+      "text_boilerplate_intensity"
+    ]
+  },
+  "baseline_zip_info": {
+    "source_zip_dir": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1",
+    "output_dir": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation",
+    "zip_count": 4,
+    "copied_member_count": 20,
+    "validation_rows": 4,
+    "variant_summary_rows": 4,
+    "copied_members": [
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_210_R6c_v1_fold_2018_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/config.yaml",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_210_R6c_v1_fold_2018_results\\weight_based_r6c_riskaware_topk_batch\\config.yaml"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_210_R6c_v1_fold_2018_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/walk_forward_variant_summary.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_210_R6c_v1_fold_2018_results\\weight_based_r6c_riskaware_topk_batch\\walk_forward_variant_summary.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_210_R6c_v1_fold_2018_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/walk_forward_validation_results.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_210_R6c_v1_fold_2018_results\\weight_based_r6c_riskaware_topk_batch\\walk_forward_validation_results.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_210_R6c_v1_fold_2018_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2018/validation_summary.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_210_R6c_v1_fold_2018_results\\weight_based_r6c_riskaware_topk_batch\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\fold_2018\\validation_summary.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_210_R6c_v1_fold_2018_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2018/metadata.json",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_210_R6c_v1_fold_2018_results\\weight_based_r6c_riskaware_topk_batch\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\fold_2018\\metadata.json"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_211_R6c_v1_fold_2019_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/walk_forward_validation_results.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_211_R6c_v1_fold_2019_results\\weight_based_r6c_riskaware_topk_batch\\walk_forward_validation_results.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_211_R6c_v1_fold_2019_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/config.yaml",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_211_R6c_v1_fold_2019_results\\weight_based_r6c_riskaware_topk_batch\\config.yaml"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_211_R6c_v1_fold_2019_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/walk_forward_variant_summary.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_211_R6c_v1_fold_2019_results\\weight_based_r6c_riskaware_topk_batch\\walk_forward_variant_summary.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_211_R6c_v1_fold_2019_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2019/metadata.json",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_211_R6c_v1_fold_2019_results\\weight_based_r6c_riskaware_topk_batch\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\fold_2019\\metadata.json"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_211_R6c_v1_fold_2019_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2019/validation_summary.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_211_R6c_v1_fold_2019_results\\weight_based_r6c_riskaware_topk_batch\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\fold_2019\\validation_summary.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_212_R6c_v1_fold_2020_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/config.yaml",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_212_R6c_v1_fold_2020_results\\weight_based_r6c_riskaware_topk_batch\\config.yaml"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_212_R6c_v1_fold_2020_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/walk_forward_variant_summary.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_212_R6c_v1_fold_2020_results\\weight_based_r6c_riskaware_topk_batch\\walk_forward_variant_summary.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_212_R6c_v1_fold_2020_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/walk_forward_validation_results.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_212_R6c_v1_fold_2020_results\\weight_based_r6c_riskaware_topk_batch\\walk_forward_validation_results.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_212_R6c_v1_fold_2020_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2020/metadata.json",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_212_R6c_v1_fold_2020_results\\weight_based_r6c_riskaware_topk_batch\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\fold_2020\\metadata.json"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_212_R6c_v1_fold_2020_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2020/validation_summary.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_212_R6c_v1_fold_2020_results\\weight_based_r6c_riskaware_topk_batch\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\fold_2020\\validation_summary.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_213_R6c_v1_fold_2021_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/config.yaml",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_213_R6c_v1_fold_2021_results\\weight_based_r6c_riskaware_topk_batch\\config.yaml"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_213_R6c_v1_fold_2021_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/walk_forward_validation_results.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_213_R6c_v1_fold_2021_results\\weight_based_r6c_riskaware_topk_batch\\walk_forward_validation_results.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_213_R6c_v1_fold_2021_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/walk_forward_variant_summary.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_213_R6c_v1_fold_2021_results\\weight_based_r6c_riskaware_topk_batch\\walk_forward_variant_summary.csv"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_213_R6c_v1_fold_2021_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2021/metadata.json",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_213_R6c_v1_fold_2021_results\\weight_based_r6c_riskaware_topk_batch\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\fold_2021\\metadata.json"
+      },
+      {
+        "zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_213_R6c_v1_fold_2021_results.zip",
+        "member": "weight_based_r6c_riskaware_topk_batch/R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1/fold_2021/validation_summary.csv",
+        "output": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\baseline_r6c_validation\\stage0_1_job_213_R6c_v1_fold_2021_results\\weight_based_r6c_riskaware_topk_batch\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\fold_2021\\validation_summary.csv"
+      }
+    ]
+  },
+  "r6c_frozen_summary": {
+    "strategy": "R6c Stage0.1 baseline frozen test",
+    "total_return": -0.019227155150363662,
+    "sharpe": -0.1014883191013421,
+    "max_drawdown": -0.11776058539616208,
+    "rows": 289,
+    "date_start": "2022-01-03",
+    "date_end": "2023-02-27",
+    "turnover_l1_mean": 0.007442660451225543,
+    "source_file": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage4\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_frozen_2022_2023_for_Joseph\\frozen_test_behavior_log_daily.csv"
+  },
+  "comparison_info": {
+    "comparison_summary": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\comparison_summary_old_vs_r6c.csv",
+    "comparison_deltas": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\comparison_deltas_old_vs_r6c.csv",
+    "report": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\R6C_TEXT_LAUNCH_PREP.md"
+  },
+  "zip_info": {
+    "zip_path": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\r6c_stage0_1_text_baseline_20260530\\r6c_stage0_1_deepseek_v2_text_launch_package.zip",
+    "file_count": 31,
+    "size_bytes": 34382766
+  },
+  "launch_commands": {
+    "smoke": "& \"C:\\Users\\ivanp\\anaconda3\\envs\\tensorflow\\python.exe\" -m src.ppo.stage0_1_train --config configs/stage0_1_r6c_deepseek_v2_text.yaml --variants R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1 --folds fold_2021 --smoke-test --force",
+    "full": "& \"C:\\Users\\ivanp\\anaconda3\\envs\\tensorflow\\python.exe\" -m src.ppo.stage0_1_train --config configs/stage0_1_r6c_deepseek_v2_text.yaml --variants R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1"
+  }
+}

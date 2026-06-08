@@ -74,6 +74,12 @@ Tasks:
 
 Deliverable: normalized PPO panels and comparison report.
 
+Implemented in the DRL branch:
+
+- `scripts/05_normalize_text_features_train_only.py`;
+- `artifacts/normalized_text_panels/`;
+- `reports/drl_train_only_normalization.md`.
+
 ### DRL: PPO-side text integration
 
 Goal: test whether text works better outside the raw state vector.
@@ -85,6 +91,13 @@ Tasks:
 
 Deliverable: PPO-side experiment report and implementation notes.
 
+Implemented in the DRL branch:
+
+- `scripts/06_build_ppo_text_integration_configs.py`;
+- `scripts/03_train_backtest_ppo_with_text.py --text-integration-strategy ...`;
+- `artifacts/ppo_text_integration_configs/`;
+- `reports/drl_ppo_text_integration.md`.
+
 ### DRL: Document and source quality scoring
 
 Goal: identify which documents/sources produce useful signals.
@@ -95,3 +108,9 @@ Tasks:
 - mark noisy source families.
 
 Deliverable: source/document quality table and recommendations.
+
+Implemented in the DRL branch:
+
+- `scripts/07_score_document_source_quality.py`;
+- `artifacts/document_source_quality/`;
+- `reports/drl_document_source_quality.md`.

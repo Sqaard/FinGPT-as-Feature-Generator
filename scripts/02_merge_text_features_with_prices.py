@@ -31,9 +31,50 @@ TEXT_FEATURES = [
     "company_event_risk_impact",
 ]
 
+FEATURE_METADATA_COLUMNS = {
+    "doc_id",
+    "document_hash",
+    "title",
+    "available_at",
+    "published_at",
+    "decision_date",
+    "matched_tickers",
+    "source",
+    "source_type",
+    "source_family",
+    "event_type",
+    "split",
+    "extractor_model",
+    "extractor_status",
+    "extractor_confidence",
+    "evidence_summary",
+}
+
 
 def _out_col(feature: str) -> str:
     return feature if feature.startswith("text_") else f"text_{feature}"
+
+
+def _feature_range_schema_names(schema_path: Path) -> list[str]:
+    payload = json.loads(schema_path.read_text(encoding="utf-8"))
+    features = payload.get("features")
+    if not isinstance(features, list) or not features:
+        raise ValueError(f"Schema has no features: {schema_path}")
+    names = [str(item.get("name", "")).strip() for item in features]
+    missing = [item for item in names if not item]
+    if missing:
+        raise ValueError(f"Schema contains unnamed features: {schema_path}")
+    return names
+
+
+def _detect_text_features(features_csv: Path) -> list[str]:
+    with features_csv.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        fields = list(reader.fieldnames or [])
+    features = [field for field in fields if field.startswith("text_") and field not in FEATURE_METADATA_COLUMNS]
+    if not features:
+        raise ValueError(f"Could not auto-detect text feature columns in {features_csv}")
+    return features
 
 
 def _safe_float(value: str) -> float:
@@ -82,7 +123,7 @@ def _mean(values: list[float]) -> float:
     return sum(values) / len(values) if values else 0.0
 
 
-def _load_feature_aggregates(features_csv: Path, calendar: list[str], tickers: set[str]):
+def _load_feature_aggregates(features_csv: Path, calendar: list[str], tickers: set[str], text_features: list[str]):
     stock_values: dict[tuple[str, str], dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
     market_values: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
     doc_counts: dict[tuple[str, str], int] = defaultdict(int)
@@ -100,7 +141,7 @@ def _load_feature_aggregates(features_csv: Path, calendar: list[str], tickers: s
             matched = [item.strip().upper() for item in (row.get("matched_tickers") or "").split("|") if item.strip()]
             is_market = not matched or "MARKET" in matched
             if is_market:
-                for feature in TEXT_FEATURES:
+                for feature in text_features:
                     market_values[trade_date][feature].append(_safe_float(row.get(feature, "0")))
                 market_counts[trade_date] += 1
                 continue
@@ -108,7 +149,7 @@ def _load_feature_aggregates(features_csv: Path, calendar: list[str], tickers: s
             for ticker in matched:
                 if ticker not in tickers:
                     continue
-                for feature in TEXT_FEATURES:
+                for feature in text_features:
                     stock_values[(trade_date, ticker)][feature].append(_safe_float(row.get(feature, "0")))
                 doc_counts[(trade_date, ticker)] += 1
                 used = True
@@ -123,24 +164,45 @@ def main() -> int:
     parser.add_argument("--text-features", default="artifacts/text_features_mistral.csv")
     parser.add_argument("--output", default="artifacts/merged_panel_with_text.csv")
     parser.add_argument("--manifest", default="artifacts/merge_manifest.json")
+    parser.add_argument(
+        "--feature-schema",
+        default="",
+        help="Optional schema JSON. When provided, merge exactly these feature names instead of the v1 defaults.",
+    )
+    parser.add_argument(
+        "--auto-text-features",
+        action="store_true",
+        help="Infer text feature columns from the feature CSV header.",
+    )
     args = parser.parse_args()
 
     base_panel = Path(args.base_panel)
     features_csv = Path(args.text_features)
     output = Path(args.output)
     manifest_path = Path(args.manifest)
+    if args.feature_schema:
+        text_features = _feature_range_schema_names(Path(args.feature_schema))
+    elif args.auto_text_features:
+        text_features = _detect_text_features(features_csv)
+    else:
+        text_features = TEXT_FEATURES
     output.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
 
     calendar, tickers = _read_calendar_and_tickers(base_panel)
-    stock_values, market_values, doc_counts, market_counts, skipped = _load_feature_aggregates(features_csv, calendar, tickers)
+    stock_values, market_values, doc_counts, market_counts, skipped = _load_feature_aggregates(
+        features_csv,
+        calendar,
+        tickers,
+        text_features,
+    )
 
     output_fields: list[str] | None = None
     rows_written = 0
     text_matched_rows = 0
     with base_panel.open("r", encoding="utf-8-sig", newline="") as src, output.open("w", encoding="utf-8", newline="") as dst:
         reader = csv.DictReader(src)
-        text_fields = [_out_col(name) for name in TEXT_FEATURES] + ["text_doc_count", "text_market_doc_count"]
+        text_fields = [_out_col(name) for name in text_features] + ["text_doc_count", "text_market_doc_count"]
         output_fields = _panel_fieldnames(reader.fieldnames, text_fields) + text_fields
         writer = csv.DictWriter(dst, fieldnames=output_fields, extrasaction="ignore")
         writer.writeheader()
@@ -149,7 +211,7 @@ def main() -> int:
             ticker = (row.get("tic") or "").upper()
             key = (date, ticker)
             has_text = False
-            for feature in TEXT_FEATURES:
+            for feature in text_features:
                 stock = stock_values.get(key, {}).get(feature, [])
                 market = market_values.get(date, {}).get(feature, [])
                 combined = stock + market
@@ -174,7 +236,8 @@ def main() -> int:
         "market_feature_dates": len(market_values),
         "text_matched_rows": text_matched_rows,
         "skipped_feature_rows": skipped,
-        "text_feature_columns": [_out_col(name) for name in TEXT_FEATURES],
+        "text_feature_columns": [_out_col(name) for name in text_features],
+        "text_feature_source": args.feature_schema or ("auto_text_features" if args.auto_text_features else "v1_default"),
         "missing_text_policy": "filled_with_zero",
         "date_policy": "available_at date mapped to first trading date >= available_at date",
     }

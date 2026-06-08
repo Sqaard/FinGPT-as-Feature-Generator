@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "stop_reason": "",
+  "dry_run": false,
+  "schema": "feature_schema_deepseek_v2_ppo_compact.json",
+  "feature_set": "deepseek_ppo_compact_v2",
+  "feature_columns": [
+    "text_alpha_direction",
+    "text_downside_risk",
+    "text_uncertainty",
+    "text_macro_stress",
+    "text_earnings_pressure",
+    "text_balance_sheet_stress",
+    "text_signal_confidence",
+    "text_evidence_specificity",
+    "text_numeric_evidence_density",
+    "text_boilerplate_intensity"
+  ],
+  "input_files": 8,
+  "output": "artifacts/text_features_deepseek_v2.csv",
+  "rows_written": 20005,
+  "new_rows": 17378,
+  "failed_rows": 0,
+  "model": "deepseek-chat",
+  "base_url_host": "api.deepseek.com",
+  "elapsed_seconds": 45284.229,
+  "resume": true,
+  "api_key_was_not_written": true
+}

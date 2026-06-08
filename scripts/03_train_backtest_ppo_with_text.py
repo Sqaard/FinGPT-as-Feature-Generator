@@ -64,6 +64,44 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--validation-end", default="2021-12-31")
     parser.add_argument("--test-start", default="2022-01-03")
     parser.add_argument("--test-end", default="2023-02-28")
+    parser.add_argument(
+        "--text-feature-schema",
+        type=Path,
+        default=None,
+        help="Optional schema JSON. When provided, expect these text feature columns instead of the v1 defaults.",
+    )
+    parser.add_argument(
+        "--text-feature-columns",
+        nargs="*",
+        default=None,
+        help="Optional explicit text feature columns. Overrides --text-feature-schema.",
+    )
+    parser.add_argument(
+        "--text-integration-strategy",
+        choices=["state_concat", "market_only", "text_risk_overlay", "two_branch_policy"],
+        default="state_concat",
+        help=(
+            "PPO-side text use: raw state concatenation, market-only control, "
+            "text risk overlay through turbulence, or a two-branch feature extractor."
+        ),
+    )
+    parser.add_argument(
+        "--risk-indicator-col",
+        default="turbulence",
+        help="Panel column copied into turbulence before FinRL env construction.",
+    )
+    parser.add_argument(
+        "--text-risk-overlay-weight",
+        type=float,
+        default=0.5,
+        help="Used only when the overlay column must be built inside this script.",
+    )
+    parser.add_argument(
+        "--two-branch-latent-dim",
+        type=int,
+        default=96,
+        help="Latent width for the market/text two-branch feature extractor.",
+    )
     parser.add_argument("--force-train", action="store_true", help="Retrain even if a model already exists.")
     parser.add_argument(
         "--resume-from-checkpoint",
@@ -76,6 +114,22 @@ def parse_args() -> argparse.Namespace:
         help="Validate inputs and write a manifest without importing FinRL or training PPO.",
     )
     return parser.parse_args()
+
+
+def _out_col(feature: str) -> str:
+    return feature if feature.startswith("text_") else f"text_{feature}"
+
+
+def load_text_feature_columns(args: argparse.Namespace) -> list[str]:
+    if args.text_feature_columns:
+        return [_out_col(item) for item in args.text_feature_columns]
+    if args.text_feature_schema:
+        payload = json.loads(args.text_feature_schema.read_text(encoding="utf-8"))
+        features = payload.get("features")
+        if not isinstance(features, list) or not features:
+            raise ValueError(f"Schema has no features: {args.text_feature_schema}")
+        return [_out_col(str(item["name"])) for item in features]
+    return TEXT_FEATURE_COLUMNS
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
@@ -123,11 +177,11 @@ def load_stage0_pipeline(rl_project: Path):
     return stage0
 
 
-def validate_panel_header(panel: Path) -> dict[str, Any]:
+def validate_panel_header(panel: Path, text_feature_columns: list[str]) -> dict[str, Any]:
     if not panel.exists():
         raise FileNotFoundError(f"Panel not found: {panel}")
     header = list(pd.read_csv(panel, nrows=0).columns)
-    missing = [col for col in TEXT_FEATURE_COLUMNS if col not in header]
+    missing = [col for col in text_feature_columns if col not in header]
     date_col = "date" if "date" in header else ("Date" if "Date" in header else None)
     ticker_col = "tic" if "tic" in header else ("ticker" if "ticker" in header else None)
     return {
@@ -135,7 +189,7 @@ def validate_panel_header(panel: Path) -> dict[str, Any]:
         "column_count": len(header),
         "date_column": date_col,
         "ticker_column": ticker_col,
-        "text_feature_columns": [col for col in TEXT_FEATURE_COLUMNS if col in header],
+        "text_feature_columns": [col for col in text_feature_columns if col in header],
         "missing_text_feature_columns": missing,
     }
 
@@ -211,17 +265,174 @@ def prepare_numeric_feature_columns(
     return feature_columns, audit
 
 
+def text_columns_in(columns: list[str], text_feature_columns: list[str]) -> list[str]:
+    return [col for col in text_feature_columns if col in columns]
+
+
+def _numeric_series(df: pd.DataFrame, columns: list[str], default: float = 0.0) -> pd.Series:
+    for col in columns:
+        if col in df.columns:
+            return pd.to_numeric(df[col], errors="coerce").fillna(default)
+    return pd.Series(default, index=df.index, dtype="float64")
+
+
+def text_risk_score(df: pd.DataFrame) -> pd.Series:
+    risk = _numeric_series(df, ["text_downside_risk", "text_risk_intensity"]).clip(lower=0.0)
+    uncertainty = _numeric_series(df, ["text_uncertainty", "text_uncertainty_intensity"]).clip(lower=0.0)
+    event_risk = _numeric_series(df, ["text_company_event_risk_impact"]).clip(lower=0.0)
+    balance_sheet = _numeric_series(df, ["text_balance_sheet_stress"]).clip(lower=0.0)
+    earnings_pressure = (-_numeric_series(df, ["text_earnings_pressure"])).clip(lower=0.0)
+    macro_old = (-_numeric_series(df, ["text_macro_financial_conditions_impact"])).clip(lower=0.0)
+    macro_new = _numeric_series(df, ["text_macro_stress"]).clip(lower=0.0)
+    macro_risk = macro_new.combine(macro_old, max)
+    opportunity = _numeric_series(df, ["text_opportunity_intensity"]).clip(lower=0.0)
+    return (
+        (0.30 * risk)
+        + (0.20 * uncertainty)
+        + (0.15 * event_risk)
+        + (0.15 * balance_sheet)
+        + (0.10 * earnings_pressure)
+        + (0.10 * macro_risk)
+        - (0.15 * opportunity)
+    ).clip(lower=0.0)
+
+
+def apply_text_integration_strategy(
+    df: pd.DataFrame,
+    feature_columns: list[str],
+    args: argparse.Namespace,
+    text_feature_columns: list[str],
+) -> tuple[list[str], dict[str, Any]]:
+    """Adjust state/risk columns for the requested text integration strategy."""
+    text_features_present = text_columns_in(feature_columns, text_feature_columns)
+    audit: dict[str, Any] = {
+        "text_integration_strategy": args.text_integration_strategy,
+        "risk_indicator_col": args.risk_indicator_col,
+        "text_features_present": text_features_present,
+        "text_features_in_state": text_features_present,
+    }
+
+    if args.text_integration_strategy == "market_only":
+        feature_columns = [col for col in feature_columns if not col.startswith("text_")]
+        audit["text_features_in_state"] = []
+
+    if args.text_integration_strategy == "text_risk_overlay":
+        overlay_col = args.risk_indicator_col
+        if overlay_col == "turbulence":
+            overlay_col = "turbulence_text_overlay"
+            audit["risk_indicator_col_auto_set"] = overlay_col
+        if overlay_col not in df.columns:
+            if "turbulence" not in df.columns:
+                raise ValueError("Cannot build text risk overlay because the panel has no turbulence column.")
+            df["text_risk_control_score"] = text_risk_score(df)
+            train_mask = (df["date"] >= pd.Timestamp(args.train_start)) & (df["date"] <= pd.Timestamp(args.train_end))
+            train_turbulence = pd.to_numeric(df.loc[train_mask, "turbulence"], errors="coerce").fillna(0.0)
+            base_scale = float(train_turbulence.quantile(0.95))
+            if base_scale <= 0:
+                base_scale = 100.0
+            df[overlay_col] = (
+                pd.to_numeric(df["turbulence"], errors="coerce").fillna(0.0)
+                + args.text_risk_overlay_weight * base_scale * df["text_risk_control_score"]
+            )
+            audit["overlay_built_in_train_script"] = True
+            audit["train_turbulence_p95"] = base_scale
+            audit["text_risk_overlay_weight"] = args.text_risk_overlay_weight
+        args.risk_indicator_col = overlay_col
+
+    if args.risk_indicator_col != "turbulence":
+        if args.risk_indicator_col not in df.columns:
+            raise ValueError(f"--risk-indicator-col does not exist in panel: {args.risk_indicator_col}")
+        df["turbulence"] = pd.to_numeric(df[args.risk_indicator_col], errors="coerce").fillna(0.0)
+        audit["risk_indicator_copied_to_turbulence"] = True
+
+    return feature_columns, audit
+
+
+def build_two_branch_policy_kwargs(
+    deps: dict[str, object],
+    feature_columns: list[str],
+    stock_dimension: int,
+    latent_dim: int,
+    base_policy_kwargs: dict[str, object] | None,
+) -> dict[str, object]:
+    """Create an SB3 feature extractor that separates market and text features."""
+    from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
+
+    torch = deps["torch"]
+    text_features = {col for col in feature_columns if col.startswith("text_")}
+    offset = 1 + (2 * stock_dimension)
+    text_indices: list[int] = []
+    market_indices = list(range(offset))
+    for feature_idx, column in enumerate(feature_columns):
+        start = offset + (feature_idx * stock_dimension)
+        positions = list(range(start, start + stock_dimension))
+        if column in text_features:
+            text_indices.extend(positions)
+        else:
+            market_indices.extend(positions)
+    if not text_indices:
+        raise ValueError("two_branch_policy requires text features in the PPO state.")
+
+    class TwoBranchFinancialExtractor(BaseFeaturesExtractor):  # type: ignore[misc, valid-type]
+        def __init__(
+            self,
+            observation_space,
+            market_positions: list[int],
+            text_positions: list[int],
+            branch_dim: int,
+        ):
+            super().__init__(observation_space, features_dim=branch_dim * 2)
+            self.register_buffer("market_positions", torch.tensor(market_positions, dtype=torch.long), persistent=False)
+            self.register_buffer("text_positions", torch.tensor(text_positions, dtype=torch.long), persistent=False)
+            self.market_net = torch.nn.Sequential(
+                torch.nn.Linear(len(market_positions), branch_dim),
+                torch.nn.ReLU(),
+                torch.nn.Linear(branch_dim, branch_dim),
+                torch.nn.ReLU(),
+            )
+            self.text_net = torch.nn.Sequential(
+                torch.nn.Linear(len(text_positions), branch_dim),
+                torch.nn.ReLU(),
+                torch.nn.Linear(branch_dim, branch_dim),
+                torch.nn.ReLU(),
+            )
+
+        def forward(self, observations):  # noqa: ANN001
+            market_obs = observations.index_select(1, self.market_positions)
+            text_obs = observations.index_select(1, self.text_positions)
+            return torch.cat([self.market_net(market_obs), self.text_net(text_obs)], dim=1)
+
+    policy_kwargs = dict(base_policy_kwargs or {})
+    policy_kwargs.update(
+        {
+            "features_extractor_class": TwoBranchFinancialExtractor,
+            "features_extractor_kwargs": {
+                "market_positions": market_indices,
+                "text_positions": text_indices,
+                "branch_dim": latent_dim,
+            },
+        }
+    )
+    return policy_kwargs
+
+
 def dry_run(args: argparse.Namespace) -> None:
-    header_info = validate_panel_header(args.panel)
+    text_feature_columns = load_text_feature_columns(args)
+    header_info = validate_panel_header(args.panel, text_feature_columns)
     sample = pd.read_csv(args.panel, nrows=1000)
+    if "date" in sample.columns:
+        sample["date"] = pd.to_datetime(sample["date"])
     raw_feature_columns = [c for c in sample.columns if c not in NON_FEATURE_COLUMNS]
     feature_columns, feature_audit = prepare_numeric_feature_columns(sample, raw_feature_columns)
+    feature_columns, strategy_audit = apply_text_integration_strategy(sample, feature_columns, args, text_feature_columns)
     payload = {
         "status": "dry_run_ok" if not header_info["missing_text_feature_columns"] else "dry_run_missing_text_features",
         "panel_header": header_info,
+        "expected_text_feature_columns": text_feature_columns,
         "sample_rows_checked": len(sample),
         "numeric_feature_column_count": len(feature_columns),
         "feature_audit_sample": feature_audit,
+        "strategy_audit_sample": strategy_audit,
         "rl_project_exists": args.rl_project.exists(),
         "stage0_audit_exists": (args.rl_project / "stage0_audit").exists(),
         "training_was_not_started": True,
@@ -260,7 +471,8 @@ def main() -> None:
         return
 
     os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
-    header_info = validate_panel_header(args.panel)
+    text_feature_columns = load_text_feature_columns(args)
+    header_info = validate_panel_header(args.panel, text_feature_columns)
     if header_info["missing_text_feature_columns"]:
         raise ValueError(f"Panel is missing text features: {header_info['missing_text_feature_columns']}")
 
@@ -276,15 +488,30 @@ def main() -> None:
     df = stage0.load_feature_panel(str(args.panel))
     raw_feature_columns = stage0.infer_feature_columns(df)
     feature_columns, feature_audit = prepare_numeric_feature_columns(df, raw_feature_columns)
-    text_features_used = [col for col in TEXT_FEATURE_COLUMNS if col in feature_columns]
-    if len(text_features_used) != len(TEXT_FEATURE_COLUMNS):
-        missing_numeric_text_features = [col for col in TEXT_FEATURE_COLUMNS if col not in text_features_used]
+    feature_columns, strategy_audit = apply_text_integration_strategy(df, feature_columns, args, text_feature_columns)
+    text_features_used = [col for col in text_feature_columns if col in feature_columns]
+    if args.text_integration_strategy != "market_only" and len(text_features_used) != len(text_feature_columns):
+        missing_numeric_text_features = [col for col in text_feature_columns if col not in text_features_used]
         raise ValueError(f"Text features are present but not numeric: {missing_numeric_text_features}")
-    write_json(args.output_dir / "feature_column_audit.json", feature_audit)
+    write_json(
+        args.output_dir / "feature_column_audit.json",
+        {
+            **feature_audit,
+            "strategy_audit": strategy_audit,
+        },
+    )
 
     reward_name = stage0.config_reward_name(args.selected_config)
     env_cls = stage0.make_env_class(stock_env_cls, reward_name)
     policy_kwargs = stage0.config_policy_kwargs(args.selected_config, torch)
+    if args.text_integration_strategy == "two_branch_policy":
+        policy_kwargs = build_two_branch_policy_kwargs(
+            deps,
+            feature_columns,
+            stock_dimension=int(df["tic"].nunique()),
+            latent_dim=args.two_branch_latent_dim,
+            base_policy_kwargs=policy_kwargs,
+        )
     model_kwargs = dict(stage0.DEFAULT_PPO_KWARGS)
     if args.learning_rate is not None:
         model_kwargs["learning_rate"] = args.learning_rate
@@ -359,7 +586,7 @@ def main() -> None:
             initial_amount=args.initial_amount,
             backtest_stats=backtest_stats,
             extra={
-                "feature_set": "mistral_text_10",
+                "feature_set": args.text_feature_schema.stem if args.text_feature_schema else "mistral_text_10",
                 "selected_config": args.selected_config,
                 "text_feature_count": len(text_features_used),
             },
@@ -389,7 +616,10 @@ def main() -> None:
         "resume_from_checkpoint": str(resume_checkpoint) if resume_checkpoint else None,
         "feature_column_count": len(feature_columns),
         "raw_feature_column_count": len(raw_feature_columns),
+        "expected_text_feature_columns": text_feature_columns,
         "text_features_used": text_features_used,
+        "text_integration_strategy": args.text_integration_strategy,
+        "strategy_audit": strategy_audit,
         "excluded_non_numeric_feature_columns": feature_audit["excluded_non_numeric_columns"],
         "train_window": [args.train_start, args.train_end],
         "validation_window": [args.validation_start, args.validation_end],

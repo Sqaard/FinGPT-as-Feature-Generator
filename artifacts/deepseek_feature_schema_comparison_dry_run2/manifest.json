@@ -1,0 +1,23 @@
+{
+  "status": "completed",
+  "dry_run": true,
+  "model": "dry_run_keyword_stub",
+  "base_url": "none",
+  "json_mode": false,
+  "schema_config": "feature_schema_deepseek_candidates.json",
+  "output_dir": "artifacts/deepseek_feature_schema_comparison_dry_run2",
+  "report": "reports/deepseek_feature_schema_comparison_dry_run2.md",
+  "sample_docs": "artifacts/deepseek_feature_schema_comparison_dry_run2/sample_docs.jsonl",
+  "sample_doc_count": 4,
+  "schemas": [
+    "literature_top_12"
+  ],
+  "predictions": "artifacts/deepseek_feature_schema_comparison_dry_run2/sample_predictions.jsonl",
+  "ok_predictions": 4,
+  "error_predictions": 0,
+  "schema_summary": "artifacts/deepseek_feature_schema_comparison_dry_run2/schema_summary.csv",
+  "feature_summary": "artifacts/deepseek_feature_schema_comparison_dry_run2/feature_summary.csv",
+  "source_family_summary": "artifacts/deepseek_feature_schema_comparison_dry_run2/source_family_summary.csv",
+  "error_summary": "artifacts/deepseek_feature_schema_comparison_dry_run2/error_summary.csv",
+  "errors": "artifacts/deepseek_feature_schema_comparison_dry_run2/extraction_errors.jsonl"
+}

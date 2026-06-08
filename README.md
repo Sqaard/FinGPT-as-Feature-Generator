@@ -61,6 +61,9 @@ drawdown is slightly worse.
 | `artifacts/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv` | merged PPO panel |
 | `ppo_without_text_BENCHMARK/` | frozen baseline model and metrics |
 | `rl_stage0_project/` | copied local PPO Stage0 code |
+| `scripts/05_normalize_text_features_train_only.py` | train-only text scalers |
+| `scripts/06_build_ppo_text_integration_configs.py` | PPO-side text experiment matrix |
+| `scripts/07_score_document_source_quality.py` | document/source quality scoring |
 | `train_ppo_with_text.ipynb` | notebook wrapper for training and comparison |
 
 ## Commands
@@ -71,6 +74,9 @@ drawdown is slightly worse.
 | Merge | `python scripts/02_merge_text_features_with_prices.py --base-panel data/processed_final_fixed_external_lagclean_full.csv --text-features artifacts/text_features_mistral.csv --output artifacts/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv` |
 | Train | `python scripts/03_train_backtest_ppo_with_text.py --timesteps 350000` |
 | Compare | `python scripts/04_compare_with_benchmark.py` |
+| Normalize text | `python scripts/05_normalize_text_features_train_only.py` |
+| Build DRL variants | `python scripts/06_build_ppo_text_integration_configs.py` |
+| Score sources | `python scripts/07_score_document_source_quality.py` |
 
 ## Team Lanes
 
@@ -90,3 +96,14 @@ drawdown is slightly worse.
 | 3d / 5d / 21d decay | filings and earnings releases matter beyond one day |
 | Reward/risk text use | text may work better as risk control than raw state |
 | Two-branch PPO policy | market features and text features need separate encoders |
+
+## DRL Branch Issue Outputs
+
+| GitHub issue | Implemented output |
+|---|---|
+| `#5` train-only normalization | `artifacts/normalized_text_panels/` and `reports/drl_train_only_normalization.md` |
+| `#6` PPO-side text integration | `artifacts/ppo_text_integration_configs/experiment_matrix.csv` and `reports/drl_ppo_text_integration.md` |
+| `#7` document/source quality | `artifacts/document_source_quality/` and `reports/drl_document_source_quality.md` |
+
+The train wrapper now supports `--text-integration-strategy` with
+`state_concat`, `market_only`, `text_risk_overlay`, and `two_branch_policy`.

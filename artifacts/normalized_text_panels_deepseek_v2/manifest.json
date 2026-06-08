@@ -1,0 +1,66 @@
+{
+  "status": "completed",
+  "source_panel": "artifacts/processed_final_fixed_external_lagclean_full_WITH_TEXT_DEEPSEEK_V2.csv",
+  "output_dir": "artifacts/normalized_text_panels_deepseek_v2",
+  "report": "reports/drl_train_only_normalization_deepseek_v2.md",
+  "scaler_stats": "artifacts/normalized_text_panels_deepseek_v2/train_only_scaler_stats.json",
+  "methods": [
+    "zscore",
+    "robust",
+    "clipped",
+    "zscore_clipped",
+    "robust_clipped"
+  ],
+  "generated_panels": [
+    {
+      "method": "zscore",
+      "output": "artifacts/normalized_text_panels_deepseek_v2/processed_final_fixed_external_lagclean_full_WITH_TEXT_DEEPSEEK_V2_zscore.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 50.29640453911324,
+      "validation_test_max_abs_value": 33.99619650407981,
+      "train_non_zero_share": 1.0,
+      "validation_test_non_zero_share": 1.0
+    },
+    {
+      "method": "robust",
+      "output": "artifacts/normalized_text_panels_deepseek_v2/processed_final_fixed_external_lagclean_full_WITH_TEXT_DEEPSEEK_V2_robust.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 9.5,
+      "validation_test_max_abs_value": 9.80555,
+      "train_non_zero_share": 0.6660443366412837,
+      "validation_test_non_zero_share": 0.7859828560296123
+    },
+    {
+      "method": "clipped",
+      "output": "artifacts/normalized_text_panels_deepseek_v2/processed_final_fixed_external_lagclean_full_WITH_TEXT_DEEPSEEK_V2_clipped.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 0.76,
+      "validation_test_max_abs_value": 0.588889,
+      "train_non_zero_share": 0.7398166827982694,
+      "validation_test_non_zero_share": 0.7693843756088057
+    },
+    {
+      "method": "zscore_clipped",
+      "output": "artifacts/normalized_text_panels_deepseek_v2/processed_final_fixed_external_lagclean_full_WITH_TEXT_DEEPSEEK_V2_zscore_clipped.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 3.0,
+      "validation_test_max_abs_value": 3.0,
+      "train_non_zero_share": 1.0,
+      "validation_test_non_zero_share": 1.0
+    },
+    {
+      "method": "robust_clipped",
+      "output": "artifacts/normalized_text_panels_deepseek_v2/processed_final_fixed_external_lagclean_full_WITH_TEXT_DEEPSEEK_V2_robust_clipped.csv",
+      "train_rows": 85753,
+      "validation_test_rows": 10266,
+      "train_max_abs_value": 3.0,
+      "validation_test_max_abs_value": 3.0,
+      "train_non_zero_share": 0.6660443366412837,
+      "validation_test_non_zero_share": 0.7859828560296123
+    }
+  ]
+}

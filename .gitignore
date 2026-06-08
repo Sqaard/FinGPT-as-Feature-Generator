@@ -7,3 +7,8 @@ __pycache__/
 *.log
 tmp/
 temp/
+artifacts/_smoke_*
+artifacts/cloud_packages_deepseek_v2_ppo_20260523/finportfolio_ppo_deepseek_v2_state_concat_robust_clipped_350k/
+artifacts/r6c_stage0_1_text_baseline_20260530/baseline_r6c_frozen_test/
+artifacts/r6c_stage0_1_text_baseline_20260530/baseline_r6c_validation/
+artifacts/r6c_stage0_1_text_baseline_20260530/rl_stage0_1_r6c_project/

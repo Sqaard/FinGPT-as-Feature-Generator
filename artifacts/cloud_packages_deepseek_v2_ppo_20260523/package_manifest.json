@@ -1,0 +1,8 @@
+{
+  "status": "completed",
+  "package_root": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\cloud_packages_deepseek_v2_ppo_20260523\\finportfolio_ppo_deepseek_v2_state_concat_robust_clipped_350k",
+  "zip": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\cloud_packages_deepseek_v2_ppo_20260523\\finportfolio_ppo_deepseek_v2_state_concat_robust_clipped_350k_20260523.zip",
+  "zip_size_mb": 52.29,
+  "unpack_script": "C:\\Users\\ivanp\\OneDrive\\Рабочий стол\\доки+черчи\\ITMO\\2_sem\\FinRL_Tsinghua\\FinGPT-as-Feature-Generator_repo\\artifacts\\cloud_packages_deepseek_v2_ppo_20260523\\unpack_setup_run_deepseek_v2_ppo.py",
+  "huawei_command": "python unpack_setup_run_deepseek_v2_ppo.py --zip finportfolio_ppo_deepseek_v2_state_concat_robust_clipped_350k_20260523.zip"
+}

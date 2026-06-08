@@ -1,0 +1,51 @@
+{
+  "status": "completed",
+  "experiment_matrix": "artifacts/ppo_text_integration_configs/experiment_matrix.csv",
+  "report": "reports/drl_ppo_text_integration.md",
+  "overlay_panel": "artifacts/ppo_text_integration_configs/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_text_risk_overlay.csv",
+  "overlay_summary": {
+    "output": "artifacts/ppo_text_integration_configs/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_text_risk_overlay.csv",
+    "train_turbulence_p95": 97.96642405420558,
+    "risk_overlay_weight": 0.5,
+    "text_risk_score_mean": 0.2816665958935525,
+    "text_risk_score_p95": 1.2742424242424235,
+    "overlay_turbulence_p95": 133.7131747903412
+  },
+  "variants": [
+    {
+      "variant": "state_concat_raw",
+      "strategy": "state_concat",
+      "panel": "artifacts/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv",
+      "purpose": "current baseline: raw text directly in PPO state",
+      "command": "python scripts/03_train_backtest_ppo_with_text.py --panel \"artifacts/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL.csv\" --output-dir artifacts/ppo_state_concat_raw --timesteps 350000 --text-integration-strategy state_concat"
+    },
+    {
+      "variant": "state_concat_robust_clipped",
+      "strategy": "state_concat",
+      "panel": "artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_robust_clipped.csv",
+      "purpose": "same architecture, train-only robust clipped text",
+      "command": "python scripts/03_train_backtest_ppo_with_text.py --panel \"artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_robust_clipped.csv\" --output-dir artifacts/ppo_state_concat_robust_clipped --timesteps 350000 --text-integration-strategy state_concat"
+    },
+    {
+      "variant": "market_only_control",
+      "strategy": "market_only",
+      "panel": "artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_robust_clipped.csv",
+      "purpose": "control run: panel contains text but PPO state excludes text columns",
+      "command": "python scripts/03_train_backtest_ppo_with_text.py --panel \"artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_robust_clipped.csv\" --output-dir artifacts/ppo_market_only_control --timesteps 350000 --text-integration-strategy market_only"
+    },
+    {
+      "variant": "text_risk_overlay",
+      "strategy": "text_risk_overlay",
+      "panel": "artifacts/ppo_text_integration_configs/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_text_risk_overlay.csv",
+      "purpose": "text affects risk control through turbulence overlay",
+      "command": "python scripts/03_train_backtest_ppo_with_text.py --panel \"artifacts/ppo_text_integration_configs/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_text_risk_overlay.csv\" --output-dir artifacts/ppo_text_risk_overlay --timesteps 350000 --text-integration-strategy text_risk_overlay --risk-indicator-col turbulence_text_overlay --turbulence-threshold 100"
+    },
+    {
+      "variant": "two_branch_policy",
+      "strategy": "two_branch_policy",
+      "panel": "artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_robust_clipped.csv",
+      "purpose": "market/text separate encoders before PPO policy/value heads",
+      "command": "python scripts/03_train_backtest_ppo_with_text.py --panel \"artifacts/normalized_text_panels/processed_final_fixed_external_lagclean_full_WITH_TEXT_MISTRAL_robust_clipped.csv\" --output-dir artifacts/ppo_two_branch_policy --timesteps 350000 --text-integration-strategy two_branch_policy"
+    }
+  ]
+}

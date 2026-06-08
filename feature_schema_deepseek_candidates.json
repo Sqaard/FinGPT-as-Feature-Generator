@@ -1,0 +1,98 @@
+{
+  "description": "DeepSeek-only candidate text feature schemas for comparing new PPO-facing text signals before expensive DRL runs.",
+  "schemas": [
+    {
+      "name": "literature_top_12",
+      "purpose": "Literature-backed financial text features: tone, uncertainty, forward-looking guidance, risk specificity, financial constraints, readability, and numeric evidence.",
+      "features": [
+        {"name": "financial_negative_tone", "min": 0, "max": 1, "meaning": "Finance-specific negative or pessimistic language supported by document evidence."},
+        {"name": "financial_positive_tone", "min": 0, "max": 1, "meaning": "Finance-specific positive or optimistic language supported by document evidence."},
+        {"name": "uncertainty_modal_intensity", "min": 0, "max": 1, "meaning": "Uncertainty, weak modal, conditional, or ambiguous language."},
+        {"name": "forward_looking_guidance_direction", "min": -1, "max": 1, "meaning": "Direction of forward-looking statements, guidance, outlook, or management expectations."},
+        {"name": "risk_factor_specificity", "min": 0, "max": 1, "meaning": "Specific, company-relevant risk disclosure rather than generic boilerplate."},
+        {"name": "litigation_regulatory_risk", "min": 0, "max": 1, "meaning": "Litigation, regulatory, antitrust, tax, compliance, or government action risk."},
+        {"name": "financial_constraint_liquidity_stress", "min": 0, "max": 1, "meaning": "Text evidence of funding constraints, liquidity pressure, refinancing risk, covenant pressure, or dividend omission risk."},
+        {"name": "earnings_release_manager_tone", "min": -1, "max": 1, "meaning": "Manager optimistic versus pessimistic tone in earnings-release or performance discussion language."},
+        {"name": "readability_obfuscation_risk", "min": 0, "max": 1, "meaning": "Complex, hard-to-read, vague, or obfuscating disclosure language."},
+        {"name": "numeric_fundamental_evidence_density", "min": 0, "max": 1, "meaning": "Density of useful numeric operating, earnings, margin, cash-flow, balance-sheet, or guidance evidence."},
+        {"name": "macro_downside_pressure", "min": 0, "max": 1, "meaning": "Macro text evidence of rates, credit, inflation, volatility, labor, energy, or market downside pressure."},
+        {"name": "text_signal_confidence", "min": 0, "max": 1, "meaning": "Confidence that the extracted text signal is specific, timely, and not boilerplate."}
+      ]
+    },
+    {
+      "name": "v1_baseline_10",
+      "purpose": "Current first-pass text-to-numerical feature set used by the Mistral panel.",
+      "features": [
+        {"name": "text_relevance_to_portfolio", "min": 0, "max": 1, "meaning": "Decision relevance for the ticker or portfolio."},
+        {"name": "sentiment_direction", "min": -1, "max": 1, "meaning": "Overall financial tone."},
+        {"name": "price_impact_direction", "min": -1, "max": 1, "meaning": "Expected directional pressure from document evidence."},
+        {"name": "risk_intensity", "min": 0, "max": 1, "meaning": "Downside risk intensity."},
+        {"name": "uncertainty_intensity", "min": 0, "max": 1, "meaning": "Uncertainty, conditionality, or unclear outlook."},
+        {"name": "opportunity_intensity", "min": 0, "max": 1, "meaning": "Upside, growth, margin, demand, buyback, or dividend opportunity."},
+        {"name": "forward_looking_intensity", "min": 0, "max": 1, "meaning": "Guidance, outlook, expectations, or future-looking language."},
+        {"name": "earnings_guidance_impact", "min": -1, "max": 1, "meaning": "Impact of earnings, revenue, EPS, margins, or guidance."},
+        {"name": "macro_financial_conditions_impact", "min": -1, "max": 1, "meaning": "Impact of rates, credit, inflation, volatility, labor, energy, or broad macro conditions."},
+        {"name": "company_event_risk_impact", "min": -1, "max": 1, "meaning": "Impact of legal, regulatory, supply-chain, demand, margin, or company-specific event risk."}
+      ]
+    },
+    {
+      "name": "investor_operator_12",
+      "purpose": "Analyst-style operating business drivers: revenue, margin, cash flow, debt, guidance, and management tone.",
+      "features": [
+        {"name": "revenue_momentum", "min": -1, "max": 1, "meaning": "Evidence that revenue or demand is accelerating or weakening."},
+        {"name": "margin_pressure", "min": 0, "max": 1, "meaning": "Cost inflation, pricing weakness, mix pressure, or margin compression."},
+        {"name": "cash_flow_quality", "min": -1, "max": 1, "meaning": "Quality of cash conversion, working capital, free cash flow, or accrual pressure."},
+        {"name": "balance_sheet_stress", "min": 0, "max": 1, "meaning": "Debt, liquidity, refinancing, leverage, covenant, or solvency pressure."},
+        {"name": "capital_return_support", "min": 0, "max": 1, "meaning": "Dividend, buyback, or shareholder-return support from the document."},
+        {"name": "guidance_revision", "min": -1, "max": 1, "meaning": "Direction of management guidance or outlook revision."},
+        {"name": "demand_strength", "min": -1, "max": 1, "meaning": "Evidence about customer demand, volume, orders, traffic, or installed base."},
+        {"name": "pricing_power", "min": -1, "max": 1, "meaning": "Ability to raise prices or defend price/mix against competition."},
+        {"name": "cost_inflation_pressure", "min": 0, "max": 1, "meaning": "Input, labor, logistics, energy, or financing cost pressure."},
+        {"name": "legal_regulatory_risk", "min": 0, "max": 1, "meaning": "Litigation, regulatory, antitrust, tax, compliance, or government action risk."},
+        {"name": "management_confidence", "min": -1, "max": 1, "meaning": "Management confidence versus caution in forward-looking statements."},
+        {"name": "valuation_reset_risk", "min": 0, "max": 1, "meaning": "Risk that valuation assumptions reset due to rates, growth, margins, or risk premium."}
+      ]
+    },
+    {
+      "name": "risk_control_8",
+      "purpose": "PPO risk-control signals that may work better as constraints or turbulence overlays than raw alpha features.",
+      "features": [
+        {"name": "liquidity_funding_stress", "min": 0, "max": 1, "meaning": "Cash, funding, refinancing, credit-market, or short-term liquidity stress."},
+        {"name": "leverage_refinancing_risk", "min": 0, "max": 1, "meaning": "Debt load, maturity wall, floating-rate exposure, or refinancing risk."},
+        {"name": "litigation_regulatory_risk", "min": 0, "max": 1, "meaning": "Legal, regulatory, tax, compliance, or government intervention risk."},
+        {"name": "supply_chain_risk", "min": 0, "max": 1, "meaning": "Supply, logistics, component, inventory, production, or delivery risk."},
+        {"name": "demand_slowdown_risk", "min": 0, "max": 1, "meaning": "Demand slowdown, customer weakness, churn, order pressure, or volume risk."},
+        {"name": "margin_compression_risk", "min": 0, "max": 1, "meaning": "Margin pressure from costs, mix, pricing, competition, or operating deleverage."},
+        {"name": "macro_tightening_risk", "min": 0, "max": 1, "meaning": "Rates, inflation, credit, volatility, oil, labor, or broad macro tightening risk."},
+        {"name": "boilerplate_risk_noise", "min": 0, "max": 1, "meaning": "Risk language looks generic or repeated rather than new/actionable."}
+      ]
+    },
+    {
+      "name": "source_quality_8",
+      "purpose": "Feature controls that separate semantic signal from source quality, boilerplate, and extraction confidence.",
+      "features": [
+        {"name": "evidence_specificity", "min": 0, "max": 1, "meaning": "Specific, document-grounded evidence rather than vague language."},
+        {"name": "numeric_evidence_density", "min": 0, "max": 1, "meaning": "Amount of useful numeric financial evidence."},
+        {"name": "forward_looking_density", "min": 0, "max": 1, "meaning": "Amount of useful forward-looking content."},
+        {"name": "boilerplate_intensity", "min": 0, "max": 1, "meaning": "Generic repeated disclosure or legal boilerplate intensity."},
+        {"name": "ticker_specificity", "min": 0, "max": 1, "meaning": "How directly the document is tied to a specific ticker instead of broad market context."},
+        {"name": "timestamp_confidence", "min": 0, "max": 1, "meaning": "Confidence that the timestamp is decision-usable."},
+        {"name": "source_reliability", "min": 0, "max": 1, "meaning": "Reliability of the source for investment evidence."},
+        {"name": "extraction_confidence", "min": 0, "max": 1, "meaning": "LLM confidence that the extracted numbers are supported by text."}
+      ]
+    },
+    {
+      "name": "ppo_state_compact_7",
+      "purpose": "Compact PPO-facing state intended to reduce noisy dimensions before training.",
+      "features": [
+        {"name": "text_alpha_direction", "min": -1, "max": 1, "meaning": "Net investable directional evidence after balancing positives and negatives."},
+        {"name": "text_downside_risk", "min": 0, "max": 1, "meaning": "Net downside risk intensity."},
+        {"name": "text_uncertainty", "min": 0, "max": 1, "meaning": "Uncertainty and conditionality of the evidence."},
+        {"name": "text_macro_stress", "min": 0, "max": 1, "meaning": "Macro or cross-asset stress relevant to the ticker/portfolio."},
+        {"name": "text_earnings_pressure", "min": -1, "max": 1, "meaning": "Earnings, revenue, margin, or guidance pressure."},
+        {"name": "text_balance_sheet_stress", "min": 0, "max": 1, "meaning": "Leverage, liquidity, funding, working-capital, or solvency pressure."},
+        {"name": "text_signal_confidence", "min": 0, "max": 1, "meaning": "Confidence that the text signal is real, timely, and not boilerplate."}
+      ]
+    }
+  ]
+}
