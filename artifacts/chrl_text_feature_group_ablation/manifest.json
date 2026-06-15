@@ -1,0 +1,61 @@
+{
+  "status": "completed",
+  "data_ready": {
+    "ready": true,
+    "raw_panel": "/home/tianyi/homeworks/DL2026/FinGPT-as-Feature-Generator/artifacts/r6c_stage0_1_text_baseline_20260530/rl_stage0_1_r6c_project/artifacts/stage0_1/features/stage0_1_weight_features_raw_WITH_DEEPSEEK_V2_TEXT10.csv",
+    "base_config": "/home/tianyi/homeworks/DL2026/FinGPT-as-Feature-Generator/artifacts/r6c_stage0_1_text_baseline_20260530/rl_stage0_1_r6c_project/configs/stage0_1_r6c_deepseek_v2_text.yaml",
+    "missing_text_features": [],
+    "text_feature_count": 10
+  },
+  "chrl_runtime_root": "/home/tianyi/homeworks/DL2026/FinGPT-as-Feature-Generator/artifacts/r6c_stage0_1_text_baseline_20260530/rl_stage0_1_r6c_project",
+  "variant": "R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1",
+  "folds": [
+    "fold_2021"
+  ],
+  "groups": {
+    "risk_uncertainty": {
+      "label": "Only risk / uncertainty",
+      "features": [
+        "text_downside_risk",
+        "text_uncertainty",
+        "text_balance_sheet_stress",
+        "text_boilerplate_intensity"
+      ]
+    },
+    "sentiment_price": {
+      "label": "Only sentiment / price impact",
+      "features": [
+        "text_alpha_direction",
+        "text_signal_confidence",
+        "text_evidence_specificity"
+      ]
+    },
+    "forward_earnings": {
+      "label": "Only forward-looking / earnings guidance",
+      "features": [
+        "text_earnings_pressure",
+        "text_numeric_evidence_density",
+        "text_signal_confidence"
+      ]
+    },
+    "macro_conditions": {
+      "label": "Only macro financial conditions",
+      "features": [
+        "text_macro_stress",
+        "text_uncertainty"
+      ]
+    },
+    "topk_train_correlation": {
+      "label": "Top-3 train-correlation features",
+      "features": [
+        "text_numeric_evidence_density",
+        "text_boilerplate_intensity",
+        "text_evidence_specificity"
+      ]
+    }
+  },
+  "result_files": {
+    "summary": "artifacts/chrl_text_feature_group_ablation/results/chrl_ablation_summary.csv",
+    "report": "artifacts/chrl_text_feature_group_ablation/final_report.md"
+  }
+}

@@ -255,3 +255,53 @@ The score combines relevance, signal density, timestamp integrity, source
 reliability, and extraction status. A next-day return diagnostic is included for
 ticker-level documents, but it is only an event-style sanity check, not an alpha
 claim.
+
+## Step 8 - DRL Lane: CHRL Text Feature Group Ablation
+
+Imported from the `Features` branch and adapted to the current CHRL naming.
+
+```powershell
+python .\scripts\13_run_chrl_text_feature_group_ablation.py
+```
+
+Key outputs:
+
+- `artifacts/chrl_text_feature_group_ablation/final_report.md`;
+- `artifacts/chrl_text_feature_group_ablation/results/chrl_ablation_summary.csv`;
+- `reports/chrl_text_feature_group_ablation.md`.
+
+Best current screening result on `fold_2021` frozen OOS:
+
+```text
+CHRL model baseline:                    return -1.92%, Sharpe -0.1015, max DD -11.78%
+CHRL model + all raw text10:             return -1.61%, Sharpe -0.0640, max DD -12.04%
+CHRL + forward/earnings compact group:   return -0.65%, Sharpe  0.0105, max DD -12.37%
+```
+
+The compact forward/earnings group contains:
+
+```text
+text_earnings_pressure
+text_numeric_evidence_density
+text_signal_confidence
+```
+
+This result is a feature-selection signal, not final evidence. It should be
+re-run on multiple seeds/folds before being treated as a production PPO input.
+
+## Step 9 - LLM Lane Methodology Port: R7g Ideas
+
+Imported from the `LLM` branch as:
+
+- `reports/r7g_regime_aware_methodology.md`.
+
+This is a methodology reference, not runnable code in this branch yet. The
+portable ideas to implement next are:
+
+- split text into company, macro, sector, and market-breadth channels;
+- avoid broadcasting macro text into every stock feature without a separate
+  channel;
+- use a two-tower market/text encoder for CHRL instead of plain concatenation;
+- test macro text as root risk/cash control rather than stock-level alpha;
+- add regime-aware reward shaping where stress increases drawdown penalty and
+  reduces return-chasing pressure.

@@ -11,8 +11,8 @@ features improve a Dow 30 PPO trading agent.
 | PPO panel | `96,019` daily stock rows |
 | Text extractor | `mistral-small-latest` |
 | Text features | `10` numerical PPO features |
-| Baseline | PPO without text, `350k` steps |
-| First result | negative ablation; use it to debug features |
+| Baseline | `CHRL model` without text |
+| Current result | compact forward/earnings text group improves fold_2021 OOS Sharpe |
 | Large files | tracked with Git LFS |
 
 ## Pipeline
@@ -36,18 +36,57 @@ flowchart LR
 
 ![PPO text ablation](artifacts/ppo_text_vs_benchmark/figures/return_sharpe_drawdown.svg)
 
-## DRL R6c Frozen OOS
+## DRL CHRL Frozen OOS
 
 | setup | OOS return | OOS Sharpe | OOS max DD |
 |---|---:|---:|---:|
 | `custom_custom` | `-7.29%` | `-0.2140` | `-20.20%` |
 | `custom_custom+text10` | `-19.60%` | `-0.9152` | `-22.28%` |
-| `R6c baseline` | `-1.92%` | `-0.1015` | `-11.78%` |
-| `R6c + raw_text10` | `-1.61%` | `-0.0640` | `-12.04%` |
+| `CHRL model` | `-1.92%` | `-0.1015` | `-11.78%` |
+| `CHRL model + raw_text10` | `-1.61%` | `-0.0640` | `-12.04%` |
 
-The current best text candidate for the DRL branch is `R6c + raw_text10`.
-It improves frozen OOS return and Sharpe versus the R6c baseline, while max
-drawdown is slightly worse.
+The current best broad text candidate for the DRL branch is
+`CHRL model + raw_text10`. It improves frozen OOS return and Sharpe versus the
+CHRL baseline, while max drawdown is slightly worse.
+
+## CHRL Text Feature Group Ablation
+
+| setup | OOS return | OOS Sharpe | OOS max DD |
+|---|---:|---:|---:|
+| `CHRL model` | `-1.92%` | `-0.1015` | `-11.78%` |
+| `CHRL model + all raw text10` | `-1.61%` | `-0.0640` | `-12.04%` |
+| `Only risk / uncertainty` | `-1.43%` | `-0.0539` | `-12.15%` |
+| `Only sentiment / price impact` | `-1.81%` | `-0.0588` | `-13.57%` |
+| `Only forward-looking / earnings guidance` | **`-0.65%`** | **`0.0105`** | `-12.37%` |
+| `Only macro financial conditions` | `-1.62%` | `-0.0741` | **`-11.59%`** |
+| `Top-3 train-correlation features` | `-1.37%` | `-0.0349` | `-12.92%` |
+
+The most promising compact PPO feature group is:
+
+```text
+text_earnings_pressure
+text_numeric_evidence_density
+text_signal_confidence
+```
+
+This is screening evidence from one frozen fold/seed, not yet final proof. It
+should be confirmed with multi-seed and multi-fold CHRL runs.
+
+Macro text is weaker as alpha but best on drawdown, so it is a better candidate
+for root risk/cash gating than direct stock-level state concatenation.
+
+## Imported Branch Ideas
+
+| Source branch | Imported artifact | Status |
+|---|---|---|
+| `Features` | `scripts/13_run_chrl_text_feature_group_ablation.py` | runnable against local CHRL/R6c launch package |
+| `Features` | `artifacts/chrl_text_feature_group_ablation/` | completed fold_2021 feature-group ablation |
+| `Features` | `reports/chrl_text_feature_group_ablation.md` | detailed interpretation |
+| `LLM` | `reports/r7g_regime_aware_methodology.md` | methodology reference, not yet runnable code |
+
+The R7g methodology suggests the next implementation direction: separated
+company/macro/sector text channels, two-tower market/text encoding, and
+regime-aware reward shaping.
 
 ## Main Files
 
@@ -64,6 +103,9 @@ drawdown is slightly worse.
 | `scripts/05_normalize_text_features_train_only.py` | train-only text scalers |
 | `scripts/06_build_ppo_text_integration_configs.py` | PPO-side text experiment matrix |
 | `scripts/07_score_document_source_quality.py` | document/source quality scoring |
+| `scripts/13_run_chrl_text_feature_group_ablation.py` | CHRL text feature group ablation |
+| `reports/chrl_text_feature_group_ablation.md` | imported Feature branch ablation report |
+| `reports/r7g_regime_aware_methodology.md` | imported LLM branch methodology reference |
 | `train_ppo_with_text.ipynb` | notebook wrapper for training and comparison |
 
 ## Commands
@@ -77,6 +119,7 @@ drawdown is slightly worse.
 | Normalize text | `python scripts/05_normalize_text_features_train_only.py` |
 | Build DRL variants | `python scripts/06_build_ppo_text_integration_configs.py` |
 | Score sources | `python scripts/07_score_document_source_quality.py` |
+| CHRL group ablation | `python scripts/13_run_chrl_text_feature_group_ablation.py` |
 
 ## Team Lanes
 
@@ -96,6 +139,8 @@ drawdown is slightly worse.
 | 3d / 5d / 21d decay | filings and earnings releases matter beyond one day |
 | Reward/risk text use | text may work better as risk control than raw state |
 | Two-branch PPO policy | market features and text features need separate encoders |
+| Separated text channels | split company, macro, sector, and market breadth text signals |
+| Regime-aware reward | use stress-aware return/drawdown weights for CHRL risk/cash control |
 
 ## DRL Branch Issue Outputs
 
@@ -104,6 +149,8 @@ drawdown is slightly worse.
 | `#5` train-only normalization | `artifacts/normalized_text_panels/` and `reports/drl_train_only_normalization.md` |
 | `#6` PPO-side text integration | `artifacts/ppo_text_integration_configs/experiment_matrix.csv` and `reports/drl_ppo_text_integration.md` |
 | `#7` document/source quality | `artifacts/document_source_quality/` and `reports/drl_document_source_quality.md` |
+| Feature branch port | `artifacts/chrl_text_feature_group_ablation/` and `reports/chrl_text_feature_group_ablation.md` |
+| LLM branch port | `reports/r7g_regime_aware_methodology.md` |
 
 The train wrapper now supports `--text-integration-strategy` with
 `state_concat`, `market_only`, `text_risk_overlay`, and `two_branch_policy`.
